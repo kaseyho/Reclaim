@@ -3,6 +3,9 @@ from copy import deepcopy
 from datetime import timedelta
 from itertools import combinations
 import os
+import secrets
+from sqlalchemy import create_engine
+from sqlalchemy.schema import CreateSchema, DropSchema
 import pytest
 from hypothesis import given, settings as property_settings, strategies as st
 from fastapi.testclient import TestClient
@@ -18,11 +21,27 @@ from reclaim.worker import tick
 
 @pytest.fixture
 def system(tmp_path):
-    config=Settings(database_url=os.getenv("TEST_DATABASE_URL") or "sqlite:///"+str(tmp_path/"test.db"),auto_worker=False,openai_api_key="",payment_mode="demo")
+    url=os.getenv("TEST_DATABASE_URL") or "sqlite:///"+str(tmp_path/"test.db")
+    bootstrap=None
+    schema=None
+    if os.getenv("TEST_DATABASE_URL"):
+        normalized=url.replace("postgres://","postgresql+psycopg://",1).replace("postgresql://","postgresql+psycopg://",1)
+        bootstrap=create_engine(normalized)
+        schema="test_"+secrets.token_hex(8)
+        with bootstrap.begin() as db:
+            db.execute(CreateSchema(schema))
+        url=bootstrap.url.update_query_dict({"options":"-csearch_path="+schema}).render_as_string(hide_password=False)
+    config=Settings(database_url=url,auto_worker=False,openai_api_key="",payment_mode="demo")
     store=Store(config.database_url)
     service=Service(store,config)
     workspace,tokens=store.create(seed())
-    return service,workspace,tokens
+    yield service,workspace,tokens
+    store.engine.dispose()
+    store.journal_engine.dispose()
+    if bootstrap:
+        with bootstrap.begin() as db:
+            db.execute(DropSchema(schema,cascade=True))
+        bootstrap.dispose()
 
 
 def add_chen(service,workspace):
