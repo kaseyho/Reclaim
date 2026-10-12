@@ -4,7 +4,7 @@
 
 A marketplace prototype for the [PayPal AI Hackathon](https://paypalaihackathon.devpost.com/). Buyers want different goods from a larger lot; Reclaim checks whether their requests can complete the entire purchase, then coordinates individual PayPal sandbox authorizations, captures and pickup orders.
 
-![Reclaim identifies a missing monitor buyer in its labelled local walkthrough](docs/submission/gallery/reclaim-missing-monitor.jpg)
+![Reclaim shows individual purchase prices and a missing monitor buyer in its labelled local walkthrough](docs/submission/gallery/reclaim-inspected-allocation.jpg)
 
 ## Run it locally
 
