@@ -7,7 +7,7 @@ This is the setup needed to replace the labelled local parser/payments with actu
 1. Sign in at https://platform.openai.com/ and create an API project/key at https://platform.openai.com/api-keys.
 2. Ensure the project can make API calls; API usage billing is separate from a ChatGPT subscription. Choose a budget in the provider dashboard.
 3. Add `OPENAI_API_KEY` to `.env`. Keep `OPENAI_MODEL=gpt-4.1-mini-2025-04-14` unless an evaluated replacement is chosen.
-4. Restart the API. **Connection status** should say OpenAI configured. A successful fresh extraction establishes the actual provider call.
+4. Restart the API and reload the browser. **Connection status** should say OpenAI configured. A successful fresh extraction establishes the actual provider call.
 5. As Maya, extract a fresh listing containing text and a photo. As Chen, interpret a fresh request. Inspect **Activity & evidence → AI traces** for the actual model, response ID, latency and token usage.
 
 The chosen snapshot supports image inputs, Responses API and structured outputs. [Model documentation](https://developers.openai.com/api/docs/models/gpt-4.1-mini), [structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs).
@@ -18,7 +18,7 @@ The chosen snapshot supports image inputs, Responses API and structured outputs.
 2. Create or select a business sandbox account for the single merchant. Create three personal sandbox buyer accounts, with sufficient test balance.
 3. Under **Apps & Credentials → Sandbox**, create an app associated with that merchant.
 4. Copy the app's client ID to `PAYPAL_CLIENT_ID` and secret to `PAYPAL_CLIENT_SECRET`. Set `PAYMENT_MODE=sandbox`.
-5. Restart the API. The app should show **PayPal sandbox · test transactions only**. The purchase button must open PayPal checkout, not the demo authorization button.
+5. Restart the API, reload the browser, and start a new isolated example. The app should show **PayPal sandbox · test transactions only**. The purchase button must open PayPal checkout, not the demo authorization button. Existing demo deals remain bound to their simulated provider and cannot be turned into sandbox payments.
 6. Complete the moving bundle in Reclaim. Accept separately as Alice, Ben, Chen and Maya. Use a distinct personal sandbox account for each actual approval. Sandbox passwords stay in PayPal's login page.
 7. Check each resulting authorization and capture ID in the sandbox merchant dashboard. Record the IDs and statuses, with buyer identifiers redacted, in the release evidence.
 

@@ -32,18 +32,23 @@ Rules: https://paypalaihackathon.devpost.com/rules
 
 ## Completion checklist
 
-- [ ] Seller text/photo extraction, editable review, confirmed separability and inventory.
-- [ ] Buyer natural language interpretation, editable constraints, confirmation.
-- [ ] Whole-lot constraint allocation, budget-safe rounding, evidence and blockers.
-- [ ] Immutable proposals, participant acceptance, reservations, stale-version rejection.
-- [ ] PayPal sandbox orders, authorization, capture, void, refund, idempotency and reconciliation.
-- [ ] Durable outbox and retry worker; duplicate webhooks and restart handling.
-- [ ] Receipts, pickup codes and problem reporting.
-- [ ] Fresh inputs and seeded furniture, creator and bulk examples.
-- [ ] Meaningful solver, payment, concurrency and browser checks.
-- [ ] Public repository, complete run/configuration instructions, deployed judge access.
-- [ ] Submission copy, gallery, under-three-minute script and footage.
+- [x] Seller text/photo upload and extraction adapter, editable review, confirmed separability and inventory; fresh local seller flow verified.
+- [x] Buyer interpretation adapter, editable constraints and confirmation; fresh local buyer flow verified.
+- [x] Whole-lot constraint allocation, budget-safe rounding, evidence and blockers.
+- [x] Immutable proposals, participant acceptance, reservations and stale-version rejection.
+- [x] PayPal sandbox adapter for orders, authorization, capture, void, refund, idempotency and reconciliation; simulated lifecycle and mocked provider contracts tested.
+- [x] Durable outbox and retry worker; duplicate webhooks and restart handling tested.
+- [x] Receipts, pickup codes and problem reporting; all three local pickups and receipt download verified in the browser.
+- [x] Fresh inputs and seeded furniture, creator and bulk examples.
+- [x] Solver, payment and concurrency tests; local browser walkthroughs; PostgreSQL and Docker checks passed in GitHub Actions.
+- [x] Public source repository and complete local run/configuration instructions.
+- [x] Submission copy, actual app gallery and under-three-minute recording script/shot list.
+- [ ] Actual OpenAI extraction/interpretation, PayPal sandbox checkout, void/refund evidence and verified webhook delivery.
+- [ ] Hosted judge access and deployed restart check, if hosting is chosen.
+- [ ] Actual provider footage for the final demonstration.
 - [ ] User's talking-head recording, final video edit, public YouTube link.
 - [ ] Devpost submission and visible confirmation.
 
 No provider credentials were configured at task start. Demo fixtures and simulated payment results must be visibly distinguished from actual OpenAI / PayPal sandbox results. User research and held-out AI precision targets remain evidence to collect, not claims.
+
+The checked entries distinguish implementation and local/CI proof from the connected-release gates. They do not imply that provider validation or final submission is complete.

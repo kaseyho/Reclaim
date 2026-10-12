@@ -4,6 +4,8 @@
 
 A marketplace prototype for the [PayPal AI Hackathon](https://paypalaihackathon.devpost.com/). Buyers want different goods from a larger lot; Reclaim checks whether their requests can complete the entire purchase, then coordinates individual PayPal sandbox authorizations, captures and pickup orders.
 
+![Reclaim identifies a missing monitor buyer in its labelled local walkthrough](docs/submission/gallery/reclaim-missing-monitor.jpg)
+
 ## Run it locally
 
 Requirements: Node.js 22.12+ and Python 3.12. macOS/Linux commands:
@@ -96,6 +98,8 @@ npm run verify
 
 This builds TypeScript/Vite and runs the Python suite, including property-based cent-rounding checks and small solver cases compared with exhaustive enumeration. Payment tests cover stale terms, concurrent proposals, incomplete approvals, lost responses, partial capture, failed refunds, expiry and restart.
 
+GitHub Actions runs the full suite against PostgreSQL 16, then builds and starts the Docker image. The verified baseline has 34 passing PostgreSQL tests; local SQLite runs have 33 passing tests and one PostgreSQL-only skip.
+
 Browser checks and their scope are recorded in [verification notes](docs/verification.md). Real provider credentials and actual sandbox approvals are separate integration gates; passing simulated tests does not establish them.
 
 ## Deploy
@@ -111,6 +115,7 @@ The blueprint does not authorize a purchase or create a cloud account by itself.
 - [Devpost write-up](docs/submission/devpost.md)
 - [Talking-head script](docs/submission/demo-script.md)
 - [Timed shot list](docs/submission/storyboard.md)
+- [Actual app gallery and captions](docs/submission/gallery/README.md)
 - [Build requirements](docs/build-plan.md)
 
 The final video must be publicly visible on YouTube and under three minutes. Hosted deployment, real provider evidence, final video, and Devpost submission are tracked separately; prepared files do not imply that an entry was submitted.

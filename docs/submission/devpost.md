@@ -42,6 +42,8 @@ Separate buyer payments are not atomic. A successful authorization can still fai
 
 The local end-to-end walkthrough covers fresh buyer requests, complementary allocations, participant review, coordinated simulated payment outcomes, individual receipts and pickup. Focused tests exercise allocation invariants, concurrency, stale proposals, timeouts, partial capture, refunds and restart behavior.
 
+The full suite passes 34 tests against PostgreSQL 16 in GitHub Actions. The Docker image builds, starts and serves the application. Browser checks include an entirely fresh seller listing and three fresh requests, all three example categories, partial-payment recovery, receipt export and independent pickup completion.
+
 **Release evidence to add before submitting:** actual OpenAI extraction/interpretation traces; actual PayPal sandbox authorization/capture/void/refund IDs; final browser verification report; hosted URL or verified complete run instructions; final public YouTube demo.
 
 ## What we learned
@@ -80,3 +82,5 @@ AI integration (under 255 characters):
 ## Submission state
 
 This is prepared copy, not proof of a saved or submitted Devpost entry. Verify the live Devpost project before creating or resubmitting anything. Complete the final evidence and video first, then inspect the final form and confirm submission on Devpost.
+
+Live check on 12 October 2026: the signed-in account's **My projects** page says to register for this hackathon and shows no project entry. Registration requires personal-experience answers, eligibility confirmation and agreement to the official rules/Devpost terms. The registration form was opened for the user; it has not been submitted by the agent.

@@ -22,7 +22,7 @@ Now each buyer and the seller review the same proposal. Everyone accepts their e
 
 Each buyer then approves an individual PayPal sandbox authorization. Reclaim waits for every authorization before starting capture. Once every capture is confirmed, each buyer gets a receipt and pickup code, and the seller prepares the separate orders.
 
-Separate payments can fail partway through. Here, one capture succeeds and the next fails. Reclaim refunds the completed capture, voids the remaining authorizations, and keeps pickup unavailable until recovery finishes. A lost response is reconciled using the same stored operation.
+Separate payments can fail partway through. In this labelled failure simulation, one capture succeeds and the next fails. Reclaim refunds the completed capture, voids the remaining authorizations, and keeps pickup unavailable until recovery finishes. A lost response is reconciled using the same stored operation.
 
 The same engine also handles creator equipment and quantities from sealed bulk cases.
 

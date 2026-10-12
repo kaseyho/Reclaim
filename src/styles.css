@@ -113,6 +113,10 @@
   .item-evidence strong { display: block; font-size: 11px; font-weight: 500; }
   .item-evidence span:not(.badge) { display: block; color: var(--muted); font-size: 9px; margin-top: 6px; }
   .item-evidence p { width: 100%; font-size: 8px; color: var(--muted); }
+  .item-facts { width: 100%; margin: 0; font-size: 10px; }
+  .item-facts div { display: flex; flex-wrap: wrap; gap: 5px 15px; padding: 4px 0; }
+  .item-facts dt { color: var(--muted); }
+  .item-facts dd { margin: 0; overflow-wrap: anywhere; }
   .bundle-meta { display: flex; flex-wrap: wrap; gap: 16px; padding-top: 16px; color: var(--muted); font-size: 9px; }
   .bundle-meta span { display: flex; align-items: center; gap: 5px; }
   .listing-details { border-top: 1px solid var(--rule); margin-top: 17px; padding-top: 14px; }
