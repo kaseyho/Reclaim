@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect width="1920" height="1080" fill="#f6f5ec"/>
+  <g transform="translate(146 143) scale(1.35)" fill="none" stroke="#294c3f" stroke-width="3" stroke-linecap="round">
+    <path d="M46 15C20 13 13 24 18 38c4 12 23 14 28-23Z"/><path d="M15 49 40 24M24 39V28M32 31h9"/>
+  </g>
+  <text x="246" y="206" font-family="Arial,sans-serif" font-size="62" font-weight="600" fill="#294c3f">reclaim ·</text>
+  <text x="162" y="451" font-family="Georgia,serif" font-size="132" fill="#26372e">Buy your piece.</text>
+  <text x="162" y="606" font-family="Georgia,serif" font-size="132" font-style="italic" fill="#294c3f">Find your people.</text>
+  <path d="M165 729h1588" stroke="#ccd3c7" stroke-width="2"/>
+  <text x="166" y="804" font-family="Arial,sans-serif" font-size="33" fill="#526352">Different needs. One complete bundle.</text>
+  <text x="166" y="936" font-family="Arial,sans-serif" font-size="24" letter-spacing="5" fill="#526352">GOOD THINGS, TOGETHER.</text>
+</svg>

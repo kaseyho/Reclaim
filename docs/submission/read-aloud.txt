@@ -1,0 +1,23 @@
+Imagine you’re furnishing a student room. You need a desk and a lamp, but the seller is offering them with a chair and a monitor. Buying everything stretches your budget, and leaves you with things you don’t need.
+
+Reclaim makes that bundle purchasable together. You buy your pieces, and Reclaim finds the people who need the rest.
+
+Here’s a moving-out bundle: a desk, lamp, chair, and monitor. The seller adds a description and a photograph. AI proposes the inventory, and the seller checks each item, confirms its condition, and agrees to separate the orders. Unknown dimensions stay unknown until they’re confirmed.
+
+Alice asks for a desk under one metre wide and a lamp, with a ninety-dollar budget. Ben wants the chair, under sixty dollars. Reclaim identifies the remaining need: someone to buy the monitor.
+
+When Chen adds that request, the group becomes complete. Alice’s share is seventy-two dollars, Ben’s is forty-eight, and Chen’s is eighty. Together, they cover the two-hundred-dollar total, including preparation.
+
+Those prices come from seller-confirmed reference weights. Budgets set a limit; they don’t decide what someone is charged. A constraint solver checks the whole allocation, and a separate validator checks it again.
+
+Now each buyer and the seller review the same proposal. Everyone accepts their exact goods, price, and pickup terms.
+
+Each buyer then approves an individual PayPal sandbox authorization. Reclaim waits for every authorization before starting capture. Once every capture is confirmed, each buyer gets a receipt and pickup code, and the seller prepares the separate orders.
+
+Separate payments can fail partway through. In this labelled failure simulation, one capture succeeds and the next fails. Reclaim refunds the completed capture, voids the remaining authorizations, and keeps pickup unavailable until recovery finishes. A lost response is reconciled using the same stored operation.
+
+The same engine also handles creator equipment and quantities from sealed bulk cases.
+
+The opportunity is practical: students and creators can access the pieces they need, while sellers can complete larger sales. The next step is testing that experience with real buyers and sellers.
+
+Buy the pieces you need. Reclaim finds the people who need the rest.

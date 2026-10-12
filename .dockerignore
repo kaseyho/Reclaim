@@ -1,0 +1,12 @@
+.git
+node_modules
+.venv
+.env*
+reclaim.db*
+dist
+artifacts
+output
+test-results
+__pycache__
+.pytest_cache
+.hypothesis
