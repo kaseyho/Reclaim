@@ -1,0 +1,32 @@
+# Configure the database and secrets before applying. This compute plan is paid;
+# this blueprint is prepared configuration, not authorization to purchase hosting.
+services:
+  - type: web
+    name: reclaim
+    runtime: docker
+    plan: 0.5c-512mb
+    healthCheckPath: /api/health
+    autoDeployTrigger: off
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: PAYMENT_MODE
+        value: sandbox
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: PAYPAL_WEBHOOK_ID
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4.1-mini-2025-04-14
+      - key: AUTO_WORKER
+        value: "true"
+      - key: AUTH_MODE
+        value: workspace
