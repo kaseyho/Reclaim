@@ -56,6 +56,8 @@ This hackathon build stores uploaded listing image data inside the private works
 
 ## 4. Render
 
+The event offers [a $50 Render credit claim](https://paypalaihackathon.devpost.com/details/render), linked from its official sponsor page. Check eligibility, the credited balance and any expiry in your account before creating resources. The prepared always-on plan is paid after applicable credits; no hosting purchase has been made by the agent.
+
 1. Connect https://github.com/kaseyho/Reclaim to a Python/Docker-capable Render service, using Dockerfile.
 2. Set `APP_URL` to the public HTTPS URL and `CORS_ORIGINS` to that same origin.
 3. Set the database and provider secrets. Choose an always-on service if it must run cancellation and payment recovery while no browser is open.

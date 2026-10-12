@@ -30,3 +30,10 @@ Do not film credentials, private account details, browser notifications, or unre
 ## What to say about evidence
 
 Show measured test results only after the final test report is generated. Do not claim a 95% AI precision rate, user interviews, real demand, environmental savings, or production readiness without the corresponding evidence. The moving-sale example is illustrative.
+
+## Prepared visual assets
+
+- `reclaim-icon.png`: 512 × 512 project icon, rendered from the original favicon SVG.
+- `reclaim-video-opening.png`: 1920 × 1080 cream opening card. Use about two seconds, or under the opening narration.
+- `reclaim-video-closing.png`: 1920 × 1080 green closing card with the public repository. Keep the total edit under 180 seconds.
+- Matching SVG source files remain editable. These cards and the gallery are preparation assets; they do not replace functioning-project video footage.

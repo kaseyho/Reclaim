@@ -2,6 +2,8 @@
 
 Reclaim's application source is MIT licensed; see LICENSE. Listing examples and SVG illustrations in public/illustrations are original fictional demo assets.
 
+The leaf project icon and opening/closing SVG cards in docs/submission are original Reclaim artwork. Their rendered PNG exports are provided with the same project licence. Actual app gallery screenshots retain the visible fictional-example and simulated-provider labels.
+
 ## Bundled interface assets
 
 - **DM Sans**, by Colophon Foundry and contributors. SIL Open Font License 1.1. Bundled through @fontsource/dm-sans; upstream: https://github.com/googlefonts/dm-fonts.
