@@ -43,6 +43,7 @@ Rules: https://paypalaihackathon.devpost.com/rules
 - [x] Solver, payment and concurrency tests; local browser walkthroughs; PostgreSQL and Docker checks passed in GitHub Actions.
 - [x] Public source repository and complete local run/configuration instructions.
 - [x] Submission copy, actual app gallery and under-three-minute recording script/shot list.
+- [x] Inventory-change and withdrawal/replacement browser checks; responsive creation, proposal and receipt checks; visible recipient prices and persistent judge persona.
 - [ ] Actual OpenAI extraction/interpretation, PayPal sandbox checkout, void/refund evidence and verified webhook delivery.
 - [ ] Hosted judge access and deployed restart check, if hosting is chosen.
 - [ ] Actual provider footage for the final demonstration.
