@@ -1,0 +1,195 @@
+{
+  "environment": "PayPal sandbox",
+  "source_base_commit": "4d31df5",
+  "local_ui_changes_at_refund_check": [
+    "Allow cancellation of prepared orders until any pickup is collected",
+    "Include payment mode in downloaded receipts"
+  ],
+  "evidence": {
+    "expiry_void": {
+      "checked_at": "2026-10-13T10:04:22.366935+00:00",
+      "environment": "PayPal sandbox",
+      "source": "Authenticated PayPal GET and persisted local aggregate",
+      "deal_id": "deal_47ad740457373849",
+      "local_deal_status": "EXPIRED",
+      "expires_at": "2026-10-13T10:03:03.557859+00:00",
+      "cancel_reason": "Checkout expired",
+      "commitments": [
+        {
+          "buyer_id": "alice",
+          "price_minor": 7200,
+          "payment_status": "VOIDED",
+          "order_id": "2VE68757W1614401W",
+          "capture_id": null,
+          "refund_id": null,
+          "fulfillment_status": "CANCELLED",
+          "provider_authorization_status": "VOIDED",
+          "provider_authorization_amount": {
+            "currency_code": "USD",
+            "value": "72.00"
+          },
+          "authorization_reference_recorded": true
+        },
+        {
+          "buyer_id": "ben",
+          "price_minor": 4800,
+          "payment_status": "CANCELLED",
+          "order_id": "3BR60669DB017323X",
+          "capture_id": null,
+          "refund_id": null,
+          "fulfillment_status": "CANCELLED",
+          "authorization_reference_recorded": false
+        },
+        {
+          "buyer_id": "chen",
+          "price_minor": 8000,
+          "payment_status": "CANCELLED",
+          "order_id": null,
+          "capture_id": null,
+          "refund_id": null,
+          "fulfillment_status": "CANCELLED",
+          "authorization_reference_recorded": false
+        }
+      ],
+      "limits": "This case had one authorization and no captures; it does not establish refunds or three-buyer capture."
+    },
+    "three_buyer_capture": {
+      "checked_at": "2026-10-13T10:25:23.894652+00:00",
+      "environment": "PayPal sandbox",
+      "source": "Authenticated PayPal GETs; no browser-forged outcomes",
+      "deal_id": "deal_736ec2a22897f5f3",
+      "proposal_version": 2,
+      "local_deal_status": "PAID",
+      "seller_accepted": true,
+      "distinct_provider_payers": 3,
+      "total_minor": 20000,
+      "commitments": [
+        {
+          "buyer_id": "alice",
+          "price_minor": 7200,
+          "payment_status": "CAPTURED",
+          "order_id": "03C406992W662604E",
+          "capture_id": "2KA42125K09379742",
+          "refund_id": null,
+          "fulfillment_status": "TO_PREPARE",
+          "provider_order_status": "COMPLETED",
+          "provider_authorization_status": "CAPTURED",
+          "provider_capture_status": "COMPLETED",
+          "provider_capture_amount": {
+            "currency_code": "USD",
+            "value": "72.00"
+          },
+          "provider_capture_create_time": "2026-10-13T10:24:30Z",
+          "payer_fingerprint_prefix": "d1ee9bf761af",
+          "authorization_reference_recorded": true
+        },
+        {
+          "buyer_id": "ben",
+          "price_minor": 4800,
+          "payment_status": "CAPTURED",
+          "order_id": "6XV32261XA595512X",
+          "capture_id": "5TR33543898437503",
+          "refund_id": null,
+          "fulfillment_status": "TO_PREPARE",
+          "provider_order_status": "COMPLETED",
+          "provider_authorization_status": "CAPTURED",
+          "provider_capture_status": "COMPLETED",
+          "provider_capture_amount": {
+            "currency_code": "USD",
+            "value": "48.00"
+          },
+          "provider_capture_create_time": "2026-10-13T10:24:33Z",
+          "payer_fingerprint_prefix": "b7b529b6aa86",
+          "authorization_reference_recorded": true
+        },
+        {
+          "buyer_id": "chen",
+          "price_minor": 8000,
+          "payment_status": "CAPTURED",
+          "order_id": "1G980399WV5176429",
+          "capture_id": "2L351631LP429164W",
+          "refund_id": null,
+          "fulfillment_status": "TO_PREPARE",
+          "provider_order_status": "COMPLETED",
+          "provider_authorization_status": "CAPTURED",
+          "provider_capture_status": "COMPLETED",
+          "provider_capture_amount": {
+            "currency_code": "USD",
+            "value": "80.00"
+          },
+          "provider_capture_create_time": "2026-10-13T10:24:36Z",
+          "payer_fingerprint_prefix": "bcff1d53d801",
+          "authorization_reference_recorded": true
+        }
+      ],
+      "limits": "Sandbox test funds and fictional goods. Refund and signed webhook checks are separate.",
+      "terms_hash_prefix": "d376766ce881"
+    },
+    "prepared_group_refund": {
+      "checked_at": "2026-10-13T10:49:32.610011+00:00",
+      "environment": "PayPal sandbox",
+      "source": "UI cancellation after preparation, followed by authenticated PayPal GETs",
+      "deal_id": "deal_736ec2a22897f5f3",
+      "proposal_version": 2,
+      "local_deal_status": "CANCELLED",
+      "cancel_reason": "Participant withdrew",
+      "lot_status": "AVAILABLE",
+      "total_refunded_minor": 20000,
+      "commitments": [
+        {
+          "buyer_id": "alice",
+          "price_minor": 7200,
+          "payment_status": "REFUNDED",
+          "capture_id": "2KA42125K09379742",
+          "refund_id": "57097208PU469542S",
+          "fulfillment_status": "CANCELLED",
+          "provider_refund_status": "COMPLETED",
+          "provider_refund_amount": {
+            "currency_code": "USD",
+            "value": "72.00"
+          },
+          "provider_refund_create_time": "2026-10-13T03:46:18-07:00",
+          "provider_capture_status": "REFUNDED"
+        },
+        {
+          "buyer_id": "ben",
+          "price_minor": 4800,
+          "payment_status": "REFUNDED",
+          "capture_id": "5TR33543898437503",
+          "refund_id": "5WU873353R065513X",
+          "fulfillment_status": "CANCELLED",
+          "provider_refund_status": "COMPLETED",
+          "provider_refund_amount": {
+            "currency_code": "USD",
+            "value": "48.00"
+          },
+          "provider_refund_create_time": "2026-10-13T03:46:20-07:00",
+          "provider_capture_status": "REFUNDED"
+        },
+        {
+          "buyer_id": "chen",
+          "price_minor": 8000,
+          "payment_status": "REFUNDED",
+          "capture_id": "2L351631LP429164W",
+          "refund_id": "8LA55001SH2597233",
+          "fulfillment_status": "CANCELLED",
+          "provider_refund_status": "COMPLETED",
+          "provider_refund_amount": {
+            "currency_code": "USD",
+            "value": "80.00"
+          },
+          "provider_refund_create_time": "2026-10-13T03:46:22-07:00",
+          "provider_capture_status": "REFUNDED"
+        }
+      ],
+      "limits": "Full refunds before pickup; not a partial-capture provider failure or a signed webhook test."
+    }
+  },
+  "limits": [
+    "Fictional goods and anonymous test accounts; no real-money commerce or user research",
+    "Authenticated provider GETs confirm these outcomes; merchant-dashboard review is separate",
+    "No signed webhook delivery or hosted restart evidence yet",
+    "The actual refund case had all three captures complete; partial-capture failure remains a labelled simulation"
+  ],
+  "public_fingerprints": "Twelve-character proposal/payer fingerprints shown; full authorization references and authenticated verification records retained locally."
+}

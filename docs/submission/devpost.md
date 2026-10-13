@@ -40,13 +40,13 @@ Separate buyer payments are not atomic. A successful authorization can still fai
 
 ## Accomplishments
 
-The local end-to-end walkthrough covers fresh buyer requests, complementary allocations, participant review, coordinated simulated payment outcomes, individual receipts and pickup. Focused tests exercise allocation invariants, concurrency, stale proposals, timeouts, partial capture, refunds and restart behavior.
+The local end-to-end walkthrough covers fresh buyer requests, complementary allocations, participant review, coordinated payments, individual receipts and pickup. Actual PayPal sandbox checks confirm three distinct buyer authorizations and captures at $72, $48 and $80; a $72 authorization was automatically voided after an incomplete group's deadline; and cancellation before pickup completed three full refunds totaling $200. Provider API reads independently confirm these outcomes. Partial-capture failure and completed pickup walkthroughs remain explicitly simulated. Focused tests exercise allocation invariants, concurrency, stale proposals, timeouts, partial capture, refunds and restart behavior.
 
 Local application checks pass 46 tests with one PostgreSQL-only skip, including 13 AI provider-contract checks. Twelve additional checks verify the evaluation grader. PostgreSQL and Docker checks run in GitHub Actions. Browser checks include an entirely fresh seller listing and three fresh requests, all three example categories, partial-payment recovery, receipt export and independent pickup completion. Actual SOCLAAS extraction from a fictional illustration and fresh buyer interpretation also produce a complete $72 / $48 / $80 allocation after review.
 
 The text development set contains 30 synthetic listings and 60 synthetic requests, with agent-authored labels kept out of the runtime prompts. SOCLAAS returned 90/90 validated responses at 96.48% proposal-field precision, 94.88% recall and 70/90 exact cases; median/p95 model-call latency was 1.54/2.99 seconds. The probes informed schema clarification, so these are development results, not untouched held-out accuracy or usable confirmed-fact precision. Independent labels, representative real photographs and human sessions remain pending.
 
-**Current local status:** actual SOCLAAS text and image input are verified. PayPal sandbox credentials authenticate; Alice's actual $72 authorization and its automatic void after checkout expiry were verified through the provider API. Three distinct buyer approvals, all captures, refund recovery, merchant-dashboard review, webhook delivery, deployment verification and the final public YouTube demo remain pending. Historical payment screenshots show labelled simulations. The examples are fictional fixtures and do not establish real seller consent or user demand. The saved Devpost story still needs this latest connection status applied.
+**Current local status:** actual SOCLAAS text/image input and PayPal sandbox authorization, capture, expiry void and full refund are verified. Seller preparation and Chen's individual sandbox receipt/export are also verified. Merchant-dashboard review, signed webhook delivery, actual collection, deployed restart/recovery and the final public YouTube demo remain pending. Historical payment screenshots retain simulation labels. The examples are fictional fixtures and do not establish real seller consent or user demand. The saved Devpost story still needs this latest status applied.
 
 ## What we learned
 
@@ -75,7 +75,7 @@ Add Render to the built-with list only if a Render deployment is actually comple
 
 Main technology requirement (under 255 characters):
 
-> PayPal JS SDK + Orders/Payments v2 manage authorization, capture and void/refund. SOCLAAS Chat Completions (default, returned qwen3.6:35b) extracts text/images and buyer needs; OR-Tools validates allocations. AI calls verified; sandbox payments pending.
+> PayPal JS SDK + Orders/Payments v2 verified three sandbox authorizations/captures, expiry voids and full refunds. SOCLAAS (default, qwen3.6:35b) extracts text/images and buyer needs; OR-Tools validates allocations. Signed webhooks and hosting pending.
 
 AI tools used while building (under 255 characters):
 
@@ -83,7 +83,7 @@ AI tools used while building (under 255 characters):
 
 Testing instructions (under 255 characters):
 
-> Run README's setup; use Maya for listings and Alice/Ben/Chen for requests, acceptance and pickup. Configure SOCLAAS or OpenAI for AI. Current payments are simulated; real sandbox needs .env keys and three PayPal test buyers. No shared credentials.
+> Run README setup. Use Maya for listings and Alice/Ben/Chen for requests, review and pickup. Configure SOCLAAS and PayPal sandbox with your own keys and three distinct test buyers. Capture/void/refund evidence is in docs/submission. No shared credentials.
 
 ## Submission state
 

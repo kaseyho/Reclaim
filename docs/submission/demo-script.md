@@ -2,7 +2,7 @@
 
 Target: approximately 2 minutes 40 seconds, leaving room for opening/closing cards under the three-minute limit. Read naturally, around 135–145 words per minute. Record the voice in one take; the product footage will cover most of the middle, with your talking head returning at the end.
 
-This script describes the intended connected release. SOCLAAS text and image input now work through the OpenAI SDK; the image check uses a fictional illustration. PayPal sandbox is configured, and one actual $72 authorization plus its automatic expiry void are verified. Before publishing, verify all three buyer authorizations, captures and refund recovery. AI and payment modes are independent; retain the applicable payment labels in footage, including historical simulations.
+SOCLAAS text and image input work through the OpenAI SDK; the image check uses a fictional illustration. Three distinct PayPal sandbox authorizations/captures, a $72 expiry void, and full refunds totaling $200 before pickup are verified. Hosting, signed webhook delivery and moving footage still need completion. AI and payment modes are independent; retain applicable payment labels, including the explicitly simulated partial-capture failure in this script.
 
 ## Read this
 
@@ -10,7 +10,7 @@ Imagine you’re furnishing a student room. You need a desk and a lamp, but the 
 
 Reclaim makes that bundle purchasable together. You buy your pieces, and Reclaim finds the people who need the rest.
 
-Here’s a moving-out bundle: a desk, lamp, chair, and monitor. The seller adds a description and a photograph. AI proposes the inventory, and the seller checks each item, confirms its condition, and agrees to separate the orders. Unknown dimensions stay unknown until they’re confirmed.
+Here’s a moving-out bundle: a desk, lamp, chair, and monitor. The seller adds a description and an image. AI proposes the inventory, and the seller checks each item, confirms its condition, and agrees to separate the orders. Unknown dimensions stay unknown until they’re confirmed.
 
 Alice asks for a desk under one metre wide and a lamp, with a ninety-dollar budget. Ben wants the chair, under sixty dollars. Reclaim identifies the remaining need: someone to buy the monitor.
 

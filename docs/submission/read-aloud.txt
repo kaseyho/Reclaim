@@ -2,7 +2,7 @@ Imagine you’re furnishing a student room. You need a desk and a lamp, but the 
 
 Reclaim makes that bundle purchasable together. You buy your pieces, and Reclaim finds the people who need the rest.
 
-Here’s a moving-out bundle: a desk, lamp, chair, and monitor. The seller adds a description and a photograph. AI proposes the inventory, and the seller checks each item, confirms its condition, and agrees to separate the orders. Unknown dimensions stay unknown until they’re confirmed.
+Here’s a moving-out bundle: a desk, lamp, chair, and monitor. The seller adds a description and an image. AI proposes the inventory, and the seller checks each item, confirms its condition, and agrees to separate the orders. Unknown dimensions stay unknown until they’re confirmed.
 
 Alice asks for a desk under one metre wide and a lamp, with a ninety-dollar budget. Ben wants the chair, under sixty dollars. Reclaim identifies the remaining need: someone to buy the monitor.
 

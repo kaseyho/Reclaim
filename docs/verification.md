@@ -48,12 +48,22 @@ These checks establish local behavior and the tested CI database/container paths
 - The prepared Render Blueprint validates against Render's published JSON schema. It specifies one paid Singapore web service and an internally connected PostgreSQL 16 database, with external database connections blocked. No Render resources have been created and no provider credentials have been sent to Render.
 - The Devpost preview contains the updated provider story and eight captioned images. After the user confirmed eligibility, all three required declarations were checked, saved and read back as checked. Demo/video URLs and the final Rules/Terms agreement remain pending. A new complete source ZIP is prepared locally, but replacement of the older uploaded ZIP is not verified: the latest Additional info and Project details views expose no ZIP upload control or attachment filename. Updated source remains available in the public repository.
 
+### Connected payment and receipt checks — 13 October 2026
+
+- Proposal v2 reset every participant's acceptance. Alice, Ben, Chen and Maya accepted the same version before checkout opened. Three distinct PayPal sandbox payer accounts then approved USD 72.00, 48.00 and 80.00 authorizations. Authenticated provider GETs confirm three `COMPLETED` captures, totaling USD 200.00, and the group reached `PAID`.
+- Maya prepared the separate orders. Chen's receipt showed the correct USD 80.00 capture, sandbox mode and a pickup code. Its downloaded JSON was checked against the actual capture ID, amount and `READY_FOR_PICKUP` status. Receipt exports now explicitly retain `payment_mode`.
+- The page previously hid cancellation as soon as orders were prepared, although the API permits cancellation until any buyer collects. The page now follows that rule. Cancelling the prepared group before pickup triggered three full refunds; authenticated PayPal GETs confirm every refund is `COMPLETED` and every corresponding capture is `REFUNDED`. The group is `CANCELLED`, all fulfillments are cancelled and the lot is `AVAILABLE`.
+- [Redacted provider evidence](submission/paypal-sandbox-evidence.json) records these actual outcomes and the earlier expiry void. Four unchanged sandbox screenshots are in the gallery. This full-refund case does not establish a partial-capture provider failure or signed webhook delivery.
+- The production build and two focused pickup/cancellation checks pass after the UI changes. The earlier PostgreSQL CI record remains above; the final change still needs its own CI result.
+- Existing Render sign-in succeeded. Reclaim's Blueprint review is open in the user's workspace, but Render requires a real payment method before proceeding. No services have been created and no API secrets have been copied to Render.
+
 ## Remaining verification gates
 
 - [x] Actual SOCLAAS text extraction, buyer interpretation and image input through the configured endpoint; mocked refusal/incomplete/schema/timeout checks. Representative real-photo accuracy remains unmeasured. The optional OpenAI adapter has mocked protocol coverage, not actual OpenAI-call evidence.
-- [ ] Actual PayPal sandbox approvals, authorizations and captures for three buyers.
+- [x] Actual PayPal sandbox approvals, authorizations and captures for three distinct buyers.
 - [x] Actual USD 72 sandbox authorization and automatic void on checkout expiry, confirmed through authenticated provider GETs.
 - [ ] Actual sandbox void and refund IDs verified in the merchant dashboard.
+- [x] Actual expiry void and three full refunds independently confirmed through authenticated PayPal API reads.
 - [ ] Verified webhook delivery and duplicate handling.
 - [x] PostgreSQL transactional locking and outbox tests in CI.
 - [x] Docker build, application startup, health and frontend serving in CI.
@@ -62,7 +72,7 @@ These checks establish local behavior and the tested CI database/container paths
 - [x] Fresh seller form, all three category flows and partial-failure recovery in the browser.
 - [x] Withdrawal/replacement and changed-inventory browser walkthroughs, including authorization cleanup and new acceptance versions.
 - [x] Responsive layout checks on forms, proposal and receipts at 390, 768 and 1280 pixels.
-- [ ] Actual provider recordings; the verified local walkthroughs use simulated outcomes.
+- [ ] Actual provider screen recordings; connected AI/payment screenshots and provider records are available, but moving footage remains pending.
 - [ ] Annotated evaluation set and real buyer/seller sessions, if obtained; otherwise disclose lack of that evidence.
 - [ ] Public video watched end to end and confirmed under 180 seconds.
 - [ ] Live Devpost submission confirmation and final repository state.
@@ -75,8 +85,8 @@ These checks establish local behavior and the tested CI database/container paths
 | Fresh needs, quantities, attributes, budgets and pickup constraints | Browser walkthrough; actual SOCLAAS interpretation; strict schemas, solver and invariant tests | Connected interpretation verified; suggestions still require correction and confirmation |
 | Complete allocation, missing demand and transparent prices | Three category walkthroughs; exhaustive/property checks | Verified at the tested prototype scale |
 | Immutable versions, reservations, all-party acceptance and recovery | Domain tests plus inventory/withdrawal browser checks above | Verified locally and in the tested PostgreSQL CI paths |
-| Sandbox authorization, capture, void, refund and signed webhook delivery | Adapter and mocked contracts; actual USD 72 authorization and expiry void verified by authenticated PayPal GETs | Authorization and expiry cleanup verified; three-buyer capture, refund recovery, merchant-dashboard review and webhook delivery pending |
-| Individual receipt, preparation, collection and problem reporting | All three pickups, JSON receipt and open-issue browser checks | Local flow verified |
+| Sandbox authorization, capture, void, refund and signed webhook delivery | Actual three-payer capture, USD 72 expiry void and USD 200 full refund verified by provider GETs; redacted evidence above | Authorization/capture/void/refund verified; merchant-dashboard review and signed webhook delivery pending |
+| Individual receipt, preparation, collection and problem reporting | Three simulated pickups and open-issue checks; actual sandbox preparation, ready receipt and exported payment mode | Local flow verified; actual sandbox collection remains pending |
 | Proposed private object storage and signed-in deployment | Workspace-private image data; optional Supabase JWT adapter; Docker/Render configuration | Dedicated object storage and deployed account paths are not integrated/verified |
 | Model evaluation, about 30 listings/60 requests and human sessions | Synthetic 30/60 text probes, frozen labels, offline parser report and actual SOCLAAS evaluation | Actual text scores available; independent labels, model comparison, real-photo accuracy and human sessions remain unverified |
 | Public licensed source and reproducible run instructions | Public repository, MIT licence, CI Docker startup and README | Available; connected run still requires provider configuration |

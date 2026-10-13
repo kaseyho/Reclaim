@@ -13,7 +13,9 @@ Do not film credentials, private account details, browser notifications, or unre
 | 2:20–2:32 | Creator and bulk categories | Creator allocations; bulk quantities split four notebooks each |
 | 2:32–2:45 | Audience and next step | Talking head; Reclaim closing card and repository/demo links |
 
-## Footage checklist
+## Scenes to record
+
+The checklist tracks footage preparation, not recording completion. Connected SOCLAAS input, three-payer sandbox captures, seller preparation, an individual receipt, expiry void and full refunds have been exercised. Their still screenshots and redacted provider records are available. Actual collection, moving screen footage and the user's recording remain pending.
 
 - [x] Fresh listing with actual SOCLAAS extraction from uploaded text and an original fictional illustration. Representative real-photo accuracy remains unmeasured.
 - [ ] Seller confirmation and unresolved attributes.

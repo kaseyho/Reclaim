@@ -34,7 +34,7 @@ The chosen snapshot supports image inputs, Responses API and structured outputs.
 
 ## 2. PayPal sandbox
 
-The local Reclaim app is now configured in sandbox mode. The user created the merchant, three distinct test buyers and Merchant app; credential authentication, one $72 buyer authorization and its automatic expiry void are verified. The following steps also document reproducible setup for a new judge environment. Three-buyer capture, refund recovery, merchant-dashboard review and webhook delivery still need verification.
+The local Reclaim app is configured in sandbox mode. The user created the merchant, three distinct test buyers and Merchant app. Credential authentication, three-buyer authorization/capture, a $72 expiry void and three full refunds totaling $200 are verified through authenticated provider API reads. The following steps document reproducible setup for a new judge environment. Merchant-dashboard review, actual collection and signed webhook delivery remain pending.
 
 1. Sign in at https://developer.paypal.com/dashboard/. Use the **Sandbox** environment.
 2. Manually create or select a business sandbox account for the single merchant and three personal sandbox buyer accounts, with sufficient test balance. Use anonymous, fictional test data. The [Developer Agreement](https://www.paypal.com/us/legalhub/paypal/xdeveloper-full?locale.x=en_US), section 2.2, prohibits automated sandbox account creation; complete this account setup yourself in **Testing Tools → Sandbox Accounts**. US test accounts fit the prototype's USD examples.
@@ -89,6 +89,8 @@ The prepared [Blueprint](../render.yaml) defines the following resources in Sing
 
 The USD 13/month compute baseline is approximately USD 27 for 63 days, before any bandwidth, build or other usage charges. This is a planning estimate, not a spending cap or verified credit balance. The database connection is supplied privately by Render. A separate worker or Supabase account is not required for this chosen setup. Confirm performance on the deployed 512 MB instance before relying on it for judging.
 
+Current account setup: Render sign-in succeeded and the Reclaim Blueprint review is open. Render requires payment information before proceeding and displays a temporary USD 1 card verification authorization. The user must enter their own real billing details and claim/verify any hackathon credits. No resources have been created or provider secrets transmitted to Render. Review Blueprint automatic syncing as well as service auto-deploy settings before enabling resources; the page warns that later Blueprint changes can change costs.
+
 1. Open the Render Blueprint creation flow for https://github.com/kaseyho/Reclaim, review both resources and the actual credit/billing details, then apply only after approving that concrete plan. If the account needs registration or payment information, complete those provider steps yourself.
 2. Set `APP_URL` to the public HTTPS URL and `CORS_ORIGINS` to that same origin.
 3. After explicit authorization to copy the existing SOCLAAS key and PayPal sandbox app credentials to this Render service, enter them in its private environment settings. The Blueprint supplies the internal database URL. Set the webhook ID after the public endpoint has been registered with PayPal. These secrets must not appear in the repository, screenshots or public testing instructions.
@@ -101,7 +103,7 @@ An optional separate worker uses `PYTHONPATH=backend python -m reclaim.worker`, 
 
 - The exact hosting project/configuration location. SOCLAAS and PayPal sandbox are already configured in the ignored local `.env`.
 - A database/hosting account and chosen plan if a hosted demo is desired.
-- Actual sandbox buyer approvals and captured/refunded/voided provider evidence.
+- Signed webhook delivery, deployed recovery/restart, actual collection and moving demo footage. Authorization, capture, expiry void and full refund evidence are already available.
 - The user's talking-head recording for the final edit.
 - Authenticated Devpost and YouTube access for the draft, upload and final submission.
 

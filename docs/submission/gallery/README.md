@@ -1,8 +1,8 @@
 # Reclaim submission gallery
 
-Captured directly from the running application on 12–13 October 2026. These are unchanged app screenshots; examples are fictional and payment references are simulated. Keep their payment labels visible. The first six show the historical local parser; the two SOCLAAS images show actual model calls and a reviewed allocation. They do not establish real seller consent or real-photo accuracy.
+Captured directly from the running application on 12–13 October 2026. These are unchanged app screenshots and fictional examples. Keep their payment labels visible. The first six show the historical local parser and simulated payments; two SOCLAAS images show actual model calls; four PayPal images show actual sandbox test transactions. They do not establish real seller consent, real-photo accuracy or real-money commerce.
 
-All eight images below were uploaded individually and verified in the saved Devpost draft on 13 October 2026. Captions fit Devpost's 140-character gallery limit. Upload one at a time and verify the saved image and caption.
+The first eight images below were uploaded individually and verified in the saved Devpost draft on 13 October 2026. The four sandbox additions are prepared locally; their upload still needs verification. Captions fit Devpost's 140-character gallery limit. Upload one at a time and verify the saved image and caption.
 
 | Image | Suggested caption |
 |---|---|
@@ -14,10 +14,14 @@ All eight images below were uploaded individually and verified in the saved Devp
 | `reclaim-missing-monitor.jpg` | Alice needs a desk and lamp; Ben needs a chair. Reclaim shows the missing monitor buyer and its $80 share, with confirmed item facts. |
 | `reclaim-soclaas-group.jpg` | Actual SOCLAAS extraction and reviewed buyer needs complete this fictional $200 bundle. Payments remain labelled simulations. |
 | `reclaim-soclaas-traces.jpg` | Actual SOCLAAS calls show qwen3.6:35b, response IDs, prompt versions, latency and token usage. Provider cost remains unmeasured. |
+| `reclaim-paypal-sandbox-expired.png` | Actual sandbox expiry: Alice's $72 authorization was voided, with no capture. PayPal's API independently confirms VOIDED. |
+| `reclaim-paypal-sandbox-captured.png` | Three distinct sandbox buyers approved $72, $48 and $80. PayPal confirms three COMPLETED captures; the $200 group is paid. |
+| `reclaim-paypal-sandbox-ready-receipt.png` | After seller preparation, Chen's actual $80 sandbox receipt shows its capture reference, pickup code and downloadable payment mode. |
+| `reclaim-paypal-sandbox-refunded.png` | Cancelling before pickup produced three full sandbox refunds totaling $200. PayPal confirms COMPLETED refunds and REFUNDED captures. |
 
 ## Release media still needed
 
 - Moving actual SOCLAAS workflow footage; the connected image check uses a fictional illustration.
-- Actual PayPal sandbox approvals, captures, receipts, voids and refunds.
+- Moving footage of actual PayPal sandbox approvals, captures, receipts, voids and refunds; still screenshots and API records are available.
 - The user's talking-head recording and final video edit.
 - Public YouTube URL, watched end to end and confirmed under three minutes.
