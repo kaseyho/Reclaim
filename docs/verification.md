@@ -54,8 +54,17 @@ These checks establish local behavior and the tested CI database/container paths
 - Maya prepared the separate orders. Chen's receipt showed the correct USD 80.00 capture, sandbox mode and a pickup code. Its downloaded JSON was checked against the actual capture ID, amount and `READY_FOR_PICKUP` status. Receipt exports now explicitly retain `payment_mode`.
 - The page previously hid cancellation as soon as orders were prepared, although the API permits cancellation until any buyer collects. The page now follows that rule. Cancelling the prepared group before pickup triggered three full refunds; authenticated PayPal GETs confirm every refund is `COMPLETED` and every corresponding capture is `REFUNDED`. The group is `CANCELLED`, all fulfillments are cancelled and the lot is `AVAILABLE`.
 - [Redacted provider evidence](submission/paypal-sandbox-evidence.json) records these actual outcomes and the earlier expiry void. Four unchanged sandbox screenshots are in the gallery. This full-refund case does not establish a partial-capture provider failure or signed webhook delivery.
-- The production build and two focused pickup/cancellation checks pass after the UI changes. The earlier PostgreSQL CI record remains above; the final change still needs its own CI result.
+- The production build and two focused pickup/cancellation checks pass after the UI changes. [PR #7 CI](https://github.com/kaseyho/Reclaim/actions/runs/38395840020) also passes the PostgreSQL suite, evaluation checks and Docker startup; the change is merged at `99b2403`.
 - Existing Render sign-in succeeded. Reclaim's Blueprint review is open in the user's workspace, but Render requires a real payment method before proceeding. No services have been created and no API secrets have been copied to Render.
+
+### Downloadable local build — 13 October 2026
+
+- The user selected a local test build instead of paid Render hosting. No Render service/database was created and no provider key was sent to Render. The official rules permit complete repository setup/run instructions as the functional-access path.
+- The ZIP includes the compiled frontend, tracked source, licences, setup instructions and redacted sandbox evidence. `run_local.py` creates a private Python environment and serves the entire app on loopback. It needs Python 3.12+ and internet for the first dependency install; Node and Docker are unnecessary for this download.
+- A fresh ZIP extraction on macOS ARM64 / Python 3.12.13 created a new environment and installed the pinned backend dependencies. Health/config confirmed `demo-parser`, `demo` and no PayPal credentials. HTTP checks completed a new monitor request, the $72/$48/$80 allocation, four acceptances, three simulated captures, seller preparation and three individual pickups, reaching `COMPLETED`. The compiled page and illustration both served successfully; the browser displayed the functional app with its mode labels.
+- Stopping and immediately restarting retained the completed deal and membership. An occupied-port check rejected another launch without stopping the server. The initial Unix port probe incorrectly rejected a recently closed socket; allowing address reuse fixed that restart check. Existing connected development servers and databases were untouched.
+- ZIP CRC and exact-value scans of local provider credentials passed. Neither credentials, databases, virtual environments nor dependency folders are bundled. Default mode ignores provider keys; `--connected` reads only this build's optional `.env` and the user's environment. Windows instructions are supplied, but Windows execution has not been verified.
+- The updated Devpost story and all twelve captioned images were saved and read back, including expiry, capture, ready receipt and full refunds. The local test-build URL and technical instructions are being finalized; the required video URL and final Rules/Terms agreement remain pending.
 
 ## Remaining verification gates
 
@@ -68,7 +77,7 @@ These checks establish local behavior and the tested CI database/container paths
 - [x] PostgreSQL transactional locking and outbox tests in CI.
 - [x] Docker build, application startup, health and frontend serving in CI.
 - [ ] Deployed PostgreSQL API/worker restart and recovery while actual provider operations are pending.
-- [ ] Deployment restart and an externally reachable judge flow, or complete clean-machine setup proof.
+- [x] Complete clean-extraction setup proof and local restart, as the selected alternative to paid deployment.
 - [x] Fresh seller form, all three category flows and partial-failure recovery in the browser.
 - [x] Withdrawal/replacement and changed-inventory browser walkthroughs, including authorization cleanup and new acceptance versions.
 - [x] Responsive layout checks on forms, proposal and receipts at 390, 768 and 1280 pixels.
@@ -89,8 +98,8 @@ These checks establish local behavior and the tested CI database/container paths
 | Individual receipt, preparation, collection and problem reporting | Three simulated pickups and open-issue checks; actual sandbox preparation, ready receipt and exported payment mode | Local flow verified; actual sandbox collection remains pending |
 | Proposed private object storage and signed-in deployment | Workspace-private image data; optional Supabase JWT adapter; Docker/Render configuration | Dedicated object storage and deployed account paths are not integrated/verified |
 | Model evaluation, about 30 listings/60 requests and human sessions | Synthetic 30/60 text probes, frozen labels, offline parser report and actual SOCLAAS evaluation | Actual text scores available; independent labels, model comparison, real-photo accuracy and human sessions remain unverified |
-| Public licensed source and reproducible run instructions | Public repository, MIT licence, CI Docker startup and README | Available; connected run still requires provider configuration |
+| Public licensed source and runnable local build | Public repository, MIT licence, CI Docker startup, README and fresh-extraction launcher proof | Local build verified on macOS ARM64; connected run requires the judge's own provider configuration |
 | Demo script, user's recording, final edit and public YouTube video | 352-word script, storyboard, original cards and app gallery | Preparation complete; recording, final video and public URL missing |
-| Devpost draft and final submission confirmation | Saved draft `1234351`; live preview at https://devpost.com/software/reclaim-us0lrm shows the updated story and eight screenshots; rating explanation and three user-confirmed eligibility declarations verified; replacement of the older source attachment unverified | Draft saved; demo/video, current payment status in the story and final agreement/submission remain pending |
+| Devpost draft and final submission confirmation | Saved draft `1234351`; story and twelve screenshots read back; rating explanation and three user-confirmed eligibility declarations verified; replacement of the older source attachment unverified | Draft saved; test-build URL, video and final agreement/submission remain pending |
 
-The full goal is not achieved. Completing the connected release requires provider/account input, the user's recording, actual provider proof, and final publication/submission. Prepared documentation and simulated results are not substitutes for those gates.
+The full goal is not achieved. The user's recording, moving app footage, the final public YouTube video and submission confirmation remain required. Local proof and actual provider proof retain their separate scope.

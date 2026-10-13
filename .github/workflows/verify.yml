@@ -28,6 +28,21 @@ jobs:
       - run: python -m pip install -r backend/requirements-dev.txt
       - run: npm ci
       - run: npm run build
+      - name: Smoke-test the downloadable local build
+        run: |
+          python scripts/package_test_build.py
+          unzip -q artifacts/raw/reclaim-local-test-build.zip -d /tmp/reclaim-build-check
+          cd /tmp/reclaim-build-check/reclaim-local-test-build
+          python run_local.py --setup-only
+          SOCLAAS_API_KEY=ignored-local-test PAYPAL_CLIENT_ID=ignored-local-test PAYPAL_CLIENT_SECRET=ignored-local-test PAYMENT_MODE=sandbox python run_local.py --port 8010 --no-browser > /tmp/reclaim-launcher.log 2>&1 &
+          reclaim_launcher_pid=$!
+          trap 'kill -TERM "$reclaim_launcher_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8010/api/health > /tmp/reclaim-build-health.json; then break; fi
+            sleep 1
+          done
+          python -c "import json; h=json.load(open('/tmp/reclaim-build-health.json')); assert h['status']=='ok' and h['payment_mode']=='demo' and h['ai_provider']=='demo-parser' and not h['paypal_configured']"
+          curl -fsS http://127.0.0.1:8010/ | python -c "import sys; assert 'Reclaim' in sys.stdin.read()"
       - run: PYTHONPATH=backend python -m pytest backend/tests -q
         env:
           TEST_DATABASE_URL: postgresql://reclaim:test-only@localhost:5432/reclaim_test

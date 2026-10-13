@@ -2,7 +2,7 @@
 
 Captured directly from the running application on 12–13 October 2026. These are unchanged app screenshots and fictional examples. Keep their payment labels visible. The first six show the historical local parser and simulated payments; two SOCLAAS images show actual model calls; four PayPal images show actual sandbox test transactions. They do not establish real seller consent, real-photo accuracy or real-money commerce.
 
-The first eight images below were uploaded individually and verified in the saved Devpost draft on 13 October 2026. The four sandbox additions are prepared locally; their upload still needs verification. Captions fit Devpost's 140-character gallery limit. Upload one at a time and verify the saved image and caption.
+All twelve images below were uploaded individually and verified in the saved Devpost draft on 13 October 2026, including the four actual sandbox additions. Captions fit Devpost's 140-character gallery limit. Historical simulated payments keep their labels.
 
 | Image | Suggested caption |
 |---|---|

@@ -30,7 +30,7 @@ Google OR-Tools CP-SAT solves integer quantity assignments with complete-request
 
 The PayPal JavaScript SDK handles buyer approval. Server-side Orders v2 and Payments v2 handle authorization, capture, void and refund. Stable request identifiers, persisted operation outcomes, verified webhook receipt and a durable job outbox support recovery and restart. PostgreSQL supports row locking; SQLite is the single-process local development adapter.
 
-The repo contains Docker and Render deployment configuration, full local setup instructions, seeded judge scenarios, and focused automated verification.
+The repo contains a Python launcher for the downloadable build, Docker and Render deployment configuration, full local setup instructions, seeded judge scenarios, and focused automated verification. The download bundles the compiled frontend so judges do not need Node or Docker.
 
 ## Challenges
 
@@ -46,7 +46,7 @@ Local application checks pass 46 tests with one PostgreSQL-only skip, including 
 
 The text development set contains 30 synthetic listings and 60 synthetic requests, with agent-authored labels kept out of the runtime prompts. SOCLAAS returned 90/90 validated responses at 96.48% proposal-field precision, 94.88% recall and 70/90 exact cases; median/p95 model-call latency was 1.54/2.99 seconds. The probes informed schema clarification, so these are development results, not untouched held-out accuracy or usable confirmed-fact precision. Independent labels, representative real photographs and human sessions remain pending.
 
-**Current local status:** actual SOCLAAS text/image input and PayPal sandbox authorization, capture, expiry void and full refund are verified. Seller preparation and Chen's individual sandbox receipt/export are also verified. Merchant-dashboard review, signed webhook delivery, actual collection, deployed restart/recovery and the final public YouTube demo remain pending. Historical payment screenshots retain simulation labels. The examples are fictional fixtures and do not establish real seller consent or user demand. The saved Devpost story still needs this latest status applied.
+**Current status:** actual SOCLAAS text/image input and PayPal sandbox authorization, capture, expiry void and full refund are verified. Seller preparation and Chen's individual sandbox receipt/export are also verified. A local test build passed a fresh-environment walkthrough through all three simulated pickups. Paid hosting is deferred. Merchant-dashboard review, signed webhook delivery, actual collection and the final public YouTube demo remain pending. Historical payment screenshots retain simulation labels. The examples are fictional fixtures and do not establish real seller consent or user demand.
 
 ## What we learned
 
@@ -65,7 +65,7 @@ Add Render to the built-with list only if a Render deployment is actually comple
 ## Links / testing notes
 
 - Repository: https://github.com/kaseyho/Reclaim
-- Functional demo URL: **PENDING deployment**. Complete local run instructions are in README.md.
+- Test-build URL: https://github.com/kaseyho/Reclaim/releases/tag/v0.1.0-hackathon-preview — ZIP publication and live Devpost URL readback are being finalized. Complete local run instructions are in README.md; paid hosting is deferred.
 - Public YouTube video: **PENDING user's recording and final edit**.
 - Payment environment: sandbox only; no real-money payments.
 - Provider modes are independent. Actual SOCLAAS AI and PayPal sandbox are configured locally. Keep the applicable mode labels visible in footage, including historical simulations.
@@ -75,7 +75,7 @@ Add Render to the built-with list only if a Render deployment is actually comple
 
 Main technology requirement (under 255 characters):
 
-> PayPal JS SDK + Orders/Payments v2 verified three sandbox authorizations/captures, expiry voids and full refunds. SOCLAAS (default, qwen3.6:35b) extracts text/images and buyer needs; OR-Tools validates allocations. Signed webhooks and hosting pending.
+> PayPal JS SDK + Orders/Payments v2 verified three sandbox authorizations/captures, expiry voids and full refunds. SOCLAAS (default, qwen3.6:35b) extracts text/images and buyer needs; OR-Tools validates allocations. Local test build provided.
 
 AI tools used while building (under 255 characters):
 
@@ -83,7 +83,7 @@ AI tools used while building (under 255 characters):
 
 Testing instructions (under 255 characters):
 
-> Run README setup. Use Maya for listings and Alice/Ben/Chen for requests, review and pickup. Configure SOCLAAS and PayPal sandbox with your own keys and three distinct test buyers. Capture/void/refund evidence is in docs/submission. No shared credentials.
+> Download the local test-build ZIP. With Python 3.12+, run python3.12 run_local.py (Windows: py -3.12 run_local.py). Use Maya/Alice/Ben/Chen. Default AI/payments are labelled simulations; see README for your own SOCLAAS/PayPal setup and real evidence.
 
 ## Submission state
 
@@ -97,7 +97,8 @@ On 13 October 2026, the user confirmed registration and the authenticated hackat
 - The preview explicitly says **INCOMPLETE SUBMISSION**. The editor says **DRAFT**, with 2/5 steps complete; incomplete steps can still contain saved fields.
 - Previously verified after revisiting the editor: the user's rating explanation and an optional `reclaim-source.zip` attachment from before the SOCLAAS changes. A fresh complete source ZIP is prepared locally, excludes secrets and workspace data, and contains the current application, instructions, assets and evaluation reports. Replacement of the uploaded ZIP is not verified. The latest Additional info and Project details views expose no ZIP upload control or attachment filename; the public GitHub repository contains the updated source.
 - Updated and verified after the SOCLAAS connection: factual provider/tool answers, judge instructions, project story and two actual-model screenshots with captions. The gallery now has eight images. Earlier images retain their historical demo labels.
+- Updated and verified after the sandbox checks: the current authorization/capture/void/refund story and four actual sandbox images with captions. The saved gallery now has twelve images. A clean local build and immediate restart were verified, and the user chose this route instead of paid hosting.
 - The user confirmed all three required eligibility declarations. They were checked, saved and read back as checked. The final Rules/Terms agreement remains unchecked.
-- Pending: working demo/test-build URL, public YouTube video, complete payment/recovery evidence, the latest PayPal connection status in the saved story and testing instructions, and final agreement/submission.
+- Pending: published test-build URL and revised technical instruction fields, public YouTube video, and final agreement/submission. Actual sandbox captures, expiry void and full refunds are verified; signed webhook delivery and actual collection remain unverified.
 
 Complete the final evidence and video, then inspect the final form and verify Devpost's submission confirmation. A saved draft and visible project preview do not establish hackathon submission.

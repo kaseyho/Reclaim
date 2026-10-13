@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .venv/
+.local-build/
 __pycache__/
 .pytest_cache/
 .hypothesis/
