@@ -65,7 +65,7 @@ Add Render to the built-with list only if a Render deployment is actually comple
 ## Links / testing notes
 
 - Repository: https://github.com/kaseyho/Reclaim
-- Test-build URL: https://github.com/kaseyho/Reclaim/releases/tag/v0.1.0-hackathon-preview — ZIP publication and live Devpost URL readback are being finalized. Complete local run instructions are in README.md; paid hosting is deferred.
+- Test-build URL: https://github.com/kaseyho/Reclaim/releases/tag/v0.1.0-hackathon-preview — published with compiled frontend, source and checksums. Its anonymous download and per-file manifest were verified. Complete local run instructions are in README.md; paid hosting is deferred.
 - Public YouTube video: **PENDING user's recording and final edit**.
 - Payment environment: sandbox only; no real-money payments.
 - Provider modes are independent. Actual SOCLAAS AI and PayPal sandbox are configured locally. Keep the applicable mode labels visible in footage, including historical simulations.
@@ -94,11 +94,12 @@ On 13 October 2026, the user confirmed registration and the authenticated hackat
 - Additional information: https://devpost.com/submit-to/31302-paypal-ai-hackathon/manage/submissions/1234351-reclaim/additional-info/edit
 - Submission ID: `1234351`; project ID: `1479953`.
 - Saved and verified: title, tagline, original thumbnail, project story, twelve built-with tags, repository link, six captioned screenshots, factual technical answers, and the user's supplied submitter/feedback choices.
-- The preview explicitly says **INCOMPLETE SUBMISSION**. The editor says **DRAFT**, with 2/5 steps complete; incomplete steps can still contain saved fields.
+- The entry remains **DRAFT**, now with **3/5 steps complete** after the test-build URL was saved. The required video and final Rules/Terms agreement are still incomplete; incomplete steps can contain saved fields.
 - Previously verified after revisiting the editor: the user's rating explanation and an optional `reclaim-source.zip` attachment from before the SOCLAAS changes. A fresh complete source ZIP is prepared locally, excludes secrets and workspace data, and contains the current application, instructions, assets and evaluation reports. Replacement of the uploaded ZIP is not verified. The latest Additional info and Project details views expose no ZIP upload control or attachment filename; the public GitHub repository contains the updated source.
 - Updated and verified after the SOCLAAS connection: factual provider/tool answers, judge instructions, project story and two actual-model screenshots with captions. The gallery now has eight images. Earlier images retain their historical demo labels.
 - Updated and verified after the sandbox checks: the current authorization/capture/void/refund story and four actual sandbox images with captions. The saved gallery now has twelve images. A clean local build and immediate restart were verified, and the user chose this route instead of paid hosting.
+- Published release `v0.1.0-hackathon-preview` from `056ea6c`, then verified the anonymous ZIP download against its checksum and 120 manifest entries. The required test-build URL, 241-character technical answer and 250-character testing instructions were saved and read back. The public project links also include the release; the source repository retains complete setup instructions.
 - The user confirmed all three required eligibility declarations. They were checked, saved and read back as checked. The final Rules/Terms agreement remains unchecked.
-- Pending: published test-build URL and revised technical instruction fields, public YouTube video, and final agreement/submission. Actual sandbox captures, expiry void and full refunds are verified; signed webhook delivery and actual collection remain unverified.
+- Pending: the user's original recording, moving app footage, public YouTube video, and final agreement/submission. Actual sandbox captures, expiry void and full refunds are verified; signed webhook delivery and actual collection remain unverified.
 
 Complete the final evidence and video, then inspect the final form and verify Devpost's submission confirmation. A saved draft and visible project preview do not establish hackathon submission.
