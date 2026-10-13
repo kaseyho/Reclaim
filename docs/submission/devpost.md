@@ -16,7 +16,7 @@ Sellers describe a divisible bundle, review extracted inventory, confirm its att
 
 Reclaim solves for a complete allocation. It explains what blocks an incomplete group, such as a missing monitor buyer. When the group becomes feasible, each participant reviews an immutable proposal showing their exact goods and price. Prices follow disclosed seller-confirmed reference weights, with deterministic cent rounding.
 
-Each buyer pays the same cooperating merchant through an individual PayPal sandbox order. Authorization precedes capture: Reclaim checks that all buyers and the seller have accepted, all required authorizations are ready, inventory is still valid, and the checkout window has not expired. A deal is paid only when every capture is confirmed complete.
+Each buyer has an individual purchase from the same cooperating merchant. The PayPal sandbox adapter uses authorization before capture: Reclaim checks that all buyers and the seller have accepted, all required authorizations are ready, inventory is still valid, and the checkout window has not expired. A deal is paid only when every capture is confirmed complete.
 
 The seller then prepares separate orders. Buyers receive individual receipts and pickup codes, and can report a problem. If a deal fails, the backend reconciles uncertain outcomes, refunds completed captures, and voids remaining authorizations before releasing inventory.
 
@@ -44,7 +44,7 @@ The local end-to-end walkthrough covers fresh buyer requests, complementary allo
 
 The full suite passes 34 tests against PostgreSQL 16 in GitHub Actions. The Docker image builds, starts and serves the application. Browser checks include an entirely fresh seller listing and three fresh requests, all three example categories, partial-payment recovery, receipt export and independent pickup completion.
 
-**Release evidence to add before submitting:** actual OpenAI extraction/interpretation traces; actual PayPal sandbox authorization/capture/void/refund IDs; final browser verification report; hosted URL or verified complete run instructions; final public YouTube demo.
+**Current draft status:** the verified walkthrough uses a labelled deterministic parser and simulated payments. Actual OpenAI extraction/interpretation, PayPal sandbox authorization/capture/void/refund and webhook evidence, deployment verification, and the final public YouTube demo are still pending. The screenshots show fictional fixtures and keep the demo labels visible; they do not establish real seller consent or user demand.
 
 ## What we learned
 
@@ -69,18 +69,31 @@ Add Render to the built-with list only if a Render deployment is actually comple
 - Local demo mode clearly labels its deterministic parser and simulated payments. Those labels must remain visible in any footage using that mode.
 - All listing examples and original SVG illustrations are fictional fixtures; they are not evidence of real seller consent or demand.
 
-## Short custom-field answers
+## Saved technical custom-field answers
 
-PayPal integration (under 255 characters):
+Main technology requirement (under 255 characters):
 
-> Individual PayPal sandbox orders authorize each buyer's exact allocated purchase. Capture starts after all approvals. The backend reconciles failures, refunds completed captures, and voids remaining authorizations before releasing inventory.
+> PayPal JS SDK + Orders/Payments v2 coordinate per-buyer authorization, capture, void/refund. OpenAI Responses (gpt-4.1-mini-2025-04-14) extracts inventory/needs; OR-Tools validates. Actual provider tests are pending; local demo is simulated.
 
-AI integration (under 255 characters):
+AI tools used while building (under 255 characters):
 
-> OpenAI Responses API proposes structured inventory and buyer requirements. People review the facts; OR-Tools checks quantities, budgets and pickup constraints. Reclaim explains the missing demand that prevents a whole bundle from selling.
+> Codex assisted coding, verification and submission preparation. The app includes an OpenAI Responses adapter using gpt-4.1-mini-2025-04-14 for inventory and buyer needs. Actual model calls remain pending; the local demo uses a deterministic parser.
+
+Testing instructions (under 255 characters):
+
+> Run README's local setup; use Maya for listings and Alice/Ben/Chen for buyer needs, acceptance, payment and pickup. Demo mode is simulated. Real sandbox requires .env keys and three PayPal test buyers. No shared credentials.
 
 ## Submission state
 
-This is prepared copy, not proof of a saved or submitted Devpost entry. Verify the live Devpost project before creating or resubmitting anything. Complete the final evidence and video first, then inspect the final form and confirm submission on Devpost.
+On 13 October 2026, the user confirmed registration and the authenticated hackathon page exposed an existing empty draft. That draft was populated and saved; no duplicate project was created.
 
-Live check on 12 October 2026: the signed-in account's **My projects** page says to register for this hackathon and shows no project entry. Registration requires personal-experience answers, eligibility confirmation and agreement to the official rules/Devpost terms. The registration form was opened for the user; it has not been submitted by the agent.
+- Draft preview: https://devpost.com/software/reclaim-us0lrm
+- Draft editor: https://devpost.com/submit-to/31302-paypal-ai-hackathon/manage/submissions/1234351-reclaim/project_details/edit
+- Additional information: https://devpost.com/submit-to/31302-paypal-ai-hackathon/manage/submissions/1234351-reclaim/additional-info/edit
+- Submission ID: `1234351`; project ID: `1479953`.
+- Saved and verified: title, tagline, original thumbnail, project story, twelve built-with tags, repository link, six captioned screenshots, factual technical answers, and the user's supplied submitter/feedback choices.
+- The preview explicitly says **INCOMPLETE SUBMISSION**. The editor says **DRAFT**, with 2/5 steps complete; incomplete steps can still contain saved fields.
+- The optional 22-file preparation ZIP was selected for upload. Chrome extension UI interrupted the save check; attachment persistence is unverified. Inspect the live draft before retrying.
+- Pending: the user's rating explanation, working demo/test-build URL, public YouTube video, actual provider evidence, eligibility declarations, and final agreement/submission.
+
+Complete the final evidence and video, then inspect the final form and verify Devpost's submission confirmation. A saved draft and visible project preview do not establish hackathon submission.
