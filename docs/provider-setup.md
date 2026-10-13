@@ -34,9 +34,11 @@ The chosen snapshot supports image inputs, Responses API and structured outputs.
 
 ## 2. PayPal sandbox
 
+The local Reclaim app is now configured in sandbox mode. The user created the merchant, three distinct test buyers and Merchant app; credential authentication, one $72 buyer authorization and its automatic expiry void are verified. The following steps also document reproducible setup for a new judge environment. Three-buyer capture, refund recovery, merchant-dashboard review and webhook delivery still need verification.
+
 1. Sign in at https://developer.paypal.com/dashboard/. Use the **Sandbox** environment.
-2. Create or select a business sandbox account for the single merchant. Create three personal sandbox buyer accounts, with sufficient test balance.
-3. Under **Apps & Credentials → Sandbox**, create an app associated with that merchant.
+2. Manually create or select a business sandbox account for the single merchant and three personal sandbox buyer accounts, with sufficient test balance. Use anonymous, fictional test data. The [Developer Agreement](https://www.paypal.com/us/legalhub/paypal/xdeveloper-full?locale.x=en_US), section 2.2, prohibits automated sandbox account creation; complete this account setup yourself in **Testing Tools → Sandbox Accounts**. US test accounts fit the prototype's USD examples.
+3. Under **Apps & Credentials → Sandbox**, create a **Merchant** app named **Reclaim**, associated with that business test account. Review and accept the agreement shown by PayPal yourself before creating the app credentials.
 4. Copy the app's client ID to `PAYPAL_CLIENT_ID` and secret to `PAYPAL_CLIENT_SECRET`. Set `PAYMENT_MODE=sandbox`.
 5. Restart the API, reload the browser, and start a new isolated example. The app should show **PayPal sandbox · test transactions only**. The purchase button must open PayPal checkout, not the demo authorization button. Existing demo deals remain bound to their simulated provider and cannot be turned into sandbox payments.
 6. Complete the moving bundle in Reclaim. Accept separately as Alice, Ben, Chen and Maya. Use a distinct personal sandbox account for each actual approval. Sandbox passwords stay in PayPal's login page.
@@ -78,9 +80,18 @@ This hackathon build stores uploaded listing image data inside the private works
 
 The event offers [a $50 Render credit claim](https://paypalaihackathon.devpost.com/details/render), linked from its official sponsor page. Check eligibility, the credited balance and any expiry in your account before creating resources. The prepared always-on plan is paid after applicable credits; no hosting purchase has been made by the agent.
 
-1. Connect https://github.com/kaseyho/Reclaim to a Python/Docker-capable Render service, using Dockerfile.
+The prepared [Blueprint](../render.yaml) defines the following resources in Singapore. Prices were checked on 13 October 2026 against [Render's pricing](https://render.com/pricing) and its [Blueprint reference](https://render.com/docs/blueprint-spec); the final account checkout remains authoritative.
+
+| Resource | Configuration | Published monthly compute rate |
+|---|---|---|
+| Reclaim web/API with its in-process worker | `0.5c-512mb`, one instance, Docker, automatic deployment off | USD 7 |
+| Reclaim PostgreSQL | `0.1c-256mb`, PostgreSQL 16, 1 GB storage, external connections blocked, storage autoscaling off | USD 6 |
+
+The USD 13/month compute baseline is approximately USD 27 for 63 days, before any bandwidth, build or other usage charges. This is a planning estimate, not a spending cap or verified credit balance. The database connection is supplied privately by Render. A separate worker or Supabase account is not required for this chosen setup. Confirm performance on the deployed 512 MB instance before relying on it for judging.
+
+1. Open the Render Blueprint creation flow for https://github.com/kaseyho/Reclaim, review both resources and the actual credit/billing details, then apply only after approving that concrete plan. If the account needs registration or payment information, complete those provider steps yourself.
 2. Set `APP_URL` to the public HTTPS URL and `CORS_ORIGINS` to that same origin.
-3. Set the database and provider secrets. Choose an always-on service if it must run cancellation and payment recovery while no browser is open.
+3. After explicit authorization to copy the existing SOCLAAS key and PayPal sandbox app credentials to this Render service, enter them in its private environment settings. The Blueprint supplies the internal database URL. Set the webhook ID after the public endpoint has been registered with PayPal. These secrets must not appear in the repository, screenshots or public testing instructions.
 4. Deploy, inspect health, run the principal flow through the deployed app, restart during queued work, and verify all provider IDs against the dashboard.
 5. Keep access available through 16 December 2026, 00:00 Singapore time, when the published judging period ends. Verify current resource expiry, uptime limits and cost in your account before confirming the service plan.
 
@@ -88,7 +99,7 @@ An optional separate worker uses `PYTHONPATH=backend python -m reclaim.worker`, 
 
 ## Information still needed to finish the connected release
 
-- PayPal sandbox settings in the ignored local `.env`, or the exact hosting project/configuration location. SOCLAAS AI is now configured locally.
+- The exact hosting project/configuration location. SOCLAAS and PayPal sandbox are already configured in the ignored local `.env`.
 - A database/hosting account and chosen plan if a hosted demo is desired.
 - Actual sandbox buyer approvals and captured/refunded/voided provider evidence.
 - The user's talking-head recording for the final edit.

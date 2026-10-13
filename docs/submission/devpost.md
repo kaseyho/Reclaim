@@ -46,7 +46,7 @@ Local application checks pass 46 tests with one PostgreSQL-only skip, including 
 
 The text development set contains 30 synthetic listings and 60 synthetic requests, with agent-authored labels kept out of the runtime prompts. SOCLAAS returned 90/90 validated responses at 96.48% proposal-field precision, 94.88% recall and 70/90 exact cases; median/p95 model-call latency was 1.54/2.99 seconds. The probes informed schema clarification, so these are development results, not untouched held-out accuracy or usable confirmed-fact precision. Independent labels, representative real photographs and human sessions remain pending.
 
-**Current draft status:** actual SOCLAAS text and image input are verified locally; payment walkthroughs still use visibly labelled simulations. Actual PayPal sandbox authorization/capture/void/refund and webhook evidence, deployment verification, and the final public YouTube demo are still pending. The examples are fictional fixtures and do not establish real seller consent or user demand.
+**Current local status:** actual SOCLAAS text and image input are verified. PayPal sandbox credentials authenticate; Alice's actual $72 authorization and its automatic void after checkout expiry were verified through the provider API. Three distinct buyer approvals, all captures, refund recovery, merchant-dashboard review, webhook delivery, deployment verification and the final public YouTube demo remain pending. Historical payment screenshots show labelled simulations. The examples are fictional fixtures and do not establish real seller consent or user demand. The saved Devpost story still needs this latest connection status applied.
 
 ## What we learned
 
@@ -68,7 +68,7 @@ Add Render to the built-with list only if a Render deployment is actually comple
 - Functional demo URL: **PENDING deployment**. Complete local run instructions are in README.md.
 - Public YouTube video: **PENDING user's recording and final edit**.
 - Payment environment: sandbox only; no real-money payments.
-- Provider modes are independent. Actual SOCLAAS AI is configured locally; current payments remain simulated. Keep the applicable mode labels visible in footage.
+- Provider modes are independent. Actual SOCLAAS AI and PayPal sandbox are configured locally. Keep the applicable mode labels visible in footage, including historical simulations.
 - All listing examples and original SVG illustrations are fictional fixtures; they are not evidence of real seller consent or demand.
 
 ## Saved technical custom-field answers
@@ -95,8 +95,9 @@ On 13 October 2026, the user confirmed registration and the authenticated hackat
 - Submission ID: `1234351`; project ID: `1479953`.
 - Saved and verified: title, tagline, original thumbnail, project story, twelve built-with tags, repository link, six captioned screenshots, factual technical answers, and the user's supplied submitter/feedback choices.
 - The preview explicitly says **INCOMPLETE SUBMISSION**. The editor says **DRAFT**, with 2/5 steps complete; incomplete steps can still contain saved fields.
-- Saved and verified after revisiting the editor: the user's rating explanation and the optional complete `reclaim-source.zip` attachment. The source ZIP contains the tracked application, run instructions, submission assets and synthetic text evaluation pack; it excludes local secrets and workspace data.
+- Previously verified after revisiting the editor: the user's rating explanation and an optional `reclaim-source.zip` attachment from before the SOCLAAS changes. A fresh complete source ZIP is prepared locally, excludes secrets and workspace data, and contains the current application, instructions, assets and evaluation reports. Replacement of the uploaded ZIP is not verified. The latest Additional info and Project details views expose no ZIP upload control or attachment filename; the public GitHub repository contains the updated source.
 - Updated and verified after the SOCLAAS connection: factual provider/tool answers, judge instructions, project story and two actual-model screenshots with captions. The gallery now has eight images. Earlier images retain their historical demo labels.
-- Pending: working demo/test-build URL, public YouTube video, actual provider evidence, eligibility declarations, and final agreement/submission.
+- The user confirmed all three required eligibility declarations. They were checked, saved and read back as checked. The final Rules/Terms agreement remains unchecked.
+- Pending: working demo/test-build URL, public YouTube video, complete payment/recovery evidence, the latest PayPal connection status in the saved story and testing instructions, and final agreement/submission.
 
 Complete the final evidence and video, then inspect the final form and verify Devpost's submission confirmation. A saved draft and visible project preview do not establish hackathon submission.
