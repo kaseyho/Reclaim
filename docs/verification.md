@@ -30,6 +30,7 @@ These checks establish local behavior and the tested CI database/container paths
 - Selected-item details now expose each recipient's full purchase and exact total. Item-marker targets measure 44 × 44 pixels; right-edge labels remain within the image.
 - Fresh examples retain Alice as the selected persona after reload. Creation dialogs focus the editing field; Escape dismisses them. A full keyboard and screen-reader audit is not claimed.
 - Devpost registration was confirmed after the user's handoff. Existing draft `1234351` was filled and saved with the title, pitch, thumbnail, story, twelve technology tags, repository link, six captioned screenshots and technical additional information. User-supplied submitter and feedback choices were saved separately. The live preview says `INCOMPLETE SUBMISSION`; the final agreement remains unchecked and the project has not been submitted.
+- [Text evaluation preparation](../evaluation/README.md): 30 Codex-authored synthetic listings and 60 requests, frozen separately from the unchanged runtime prompt. Twelve grader checks pass. The offline demo parser returns all 90 responses, with 74.03% proposal-field precision, 60.54% recall and 2/90 exact cases. These are regex-parser results, not OpenAI accuracy, usable-fact precision, photo validation or real-user evidence. A connected comparison remains pending.
 
 ## Remaining verification gates
 
@@ -60,7 +61,7 @@ These checks establish local behavior and the tested CI database/container paths
 | Sandbox authorization, capture, void, refund and signed webhook delivery | Adapter and mocked contracts; simulated journal/outbox results | Actual provider evidence missing; completion is unproven |
 | Individual receipt, preparation, collection and problem reporting | All three pickups, JSON receipt and open-issue browser checks | Local flow verified |
 | Proposed private object storage and signed-in deployment | Workspace-private image data; optional Supabase JWT adapter; Docker/Render configuration | Dedicated object storage and deployed account paths are not integrated/verified |
-| Model evaluation, about 30 listings/60 requests and human sessions | No evaluated model comparison or real-session evidence supplied | Proposed targets remain unmet; no precision, savings or interview claims made |
+| Model evaluation, about 30 listings/60 requests and human sessions | Synthetic 30/60 text probes, frozen labels, offline parser report and connected-model runner | Preparation available; independent labels, actual model/photo comparison and human sessions remain unverified |
 | Public licensed source and reproducible run instructions | Public repository, MIT licence, CI Docker startup and README | Available; connected run still requires provider configuration |
 | Demo script, user's recording, final edit and public YouTube video | 352-word script, storyboard, original cards and app gallery | Preparation complete; recording, final video and public URL missing |
 | Devpost draft and final submission confirmation | Saved draft `1234351`; live preview at https://devpost.com/software/reclaim-us0lrm shows the story and six screenshots | Draft saved; rating explanation, demo/video, user declarations and final submission remain pending |

@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test:api": "PYTHONPATH=backend .venv/bin/python -m pytest backend/tests -q",
-    "verify": "npm run build && npm run test:api"
+    "test:evaluation": "PYTHONPATH=backend .venv/bin/python -m unittest discover -s evaluation/tests -q && PYTHONPATH=backend .venv/bin/python -m reclaim.evaluation --provider baseline --output artifacts/raw/ai-evaluation.json",
+    "verify": "npm run build && npm run test:api && npm run test:evaluation"
   },
   "dependencies": {
     "@fontsource/dm-sans": "5.3.0",

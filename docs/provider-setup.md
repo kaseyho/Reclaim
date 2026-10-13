@@ -10,6 +10,8 @@ This is the setup needed to replace the labelled local parser/payments with actu
 4. Restart the API and reload the browser. **Connection status** should say OpenAI configured. A successful fresh extraction establishes the actual provider call.
 5. As Maya, extract a fresh listing containing text and a photo. As Chen, interpret a fresh request. Inspect **Activity & evidence → AI traces** for the actual model, response ID, latency and token usage.
 
+Use the [text evaluation runner](../evaluation/README.md) for a three-case smoke run, then a full frozen-set model comparison. The included 30 listings/60 requests are synthetic, with agent-authored labels; independent human review and photo cases are still needed. Keep provider reports in the ignored `artifacts/raw` folder until their contents and claims have been reviewed.
+
 The chosen snapshot supports image inputs, Responses API and structured outputs. [Model documentation](https://developers.openai.com/api/docs/models/gpt-4.1-mini), [structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs).
 
 ## 2. PayPal sandbox
