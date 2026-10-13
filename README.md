@@ -6,7 +6,29 @@ A marketplace prototype for the [PayPal AI Hackathon](https://paypalaihackathon.
 
 ![Reclaim shows individual purchase prices and a missing monitor buyer in its labelled local walkthrough](docs/submission/gallery/reclaim-inspected-allocation.jpg)
 
-## Run it locally
+## Downloadable local test build
+
+The [hackathon preview release](https://github.com/kaseyho/Reclaim/releases/tag/v0.1.0-hackathon-preview) includes `reclaim-local-test-build.zip` with the compiled frontend, source, licences, instructions and redacted sandbox evidence. Install **Python 3.12 or later**, unzip it, and open a terminal in the extracted `reclaim-local-test-build` folder.
+
+macOS/Linux:
+
+```sh
+python3.12 run_local.py
+```
+
+Windows with the Python launcher:
+
+```powershell
+py -3.12 run_local.py
+```
+
+The launcher creates its own `.local-build/venv`, installs pinned packages from PyPI on the first run, and opens http://127.0.0.1:8000. Keep the terminal open; press Ctrl+C to stop. If that port is occupied, add `--port 8001`. Node and Docker are not required for this download. First setup needs internet access. On a Python installation named `python` or `python3`, use that command instead after checking its version is at least 3.12.
+
+The default walkthrough ignores provider keys, runs entirely with labelled deterministic text parsing and simulated payments, and moves no money. Actual SOCLAAS and PayPal sandbox checks are recorded in [the evidence file](docs/submission/paypal-sandbox-evidence.json) and gallery. To make new provider calls, follow [provider setup](docs/provider-setup.md), put **your own** credentials in this extracted folder's ignored `.env`, then run `python3.12 run_local.py --connected` (Windows: `py -3.12 run_local.py --connected`). Provider access is not bundled. The connected mode uses your environment before `.env`; the app URL always matches the chosen local port.
+
+Local walkthrough data is retained in `.local-build/demo.db` and its payment journal. Keep both if preserving a session. Connected data defaults to a separate database unless your configuration supplies `DATABASE_URL`. A build manifest lists source and asset checksums. To reproduce the ZIP from the repository, run `npm ci`, `npm run build`, then `python3.12 scripts/package_test_build.py`.
+
+## Run from source
 
 Requirements: Node.js 22.12+ and Python 3.12. macOS/Linux commands:
 
