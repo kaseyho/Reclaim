@@ -96,9 +96,11 @@ The database stores domain records in transactional, versioned workspace aggrega
 npm run verify
 ```
 
-This builds TypeScript/Vite and runs the Python suite, including property-based cent-rounding checks and small solver cases compared with exhaustive enumeration. Payment tests cover stale terms, concurrent proposals, incomplete approvals, lost responses, partial capture, failed refunds, expiry and restart.
+This builds TypeScript/Vite, runs the application Python suite, and checks the evaluation grader and offline benchmark. Application tests include property-based cent-rounding checks and small solver cases compared with exhaustive enumeration. Payment tests cover stale terms, concurrent proposals, incomplete approvals, lost responses, partial capture, failed refunds, expiry and restart.
 
 GitHub Actions runs the full suite against PostgreSQL 16, then builds and starts the Docker image. The verified baseline has 34 passing PostgreSQL tests; local SQLite runs have 33 passing tests and one PostgreSQL-only skip.
+
+The [text evaluation pack](evaluation/README.md) freezes 30 synthetic listings and 60 synthetic requests independently of the runtime prompt. It includes an offline parser report, twelve scoring checks and an explicit opt-in OpenAI comparison command. GitHub Actions checks the grader and runs the offline benchmark without an API key. These are unconfirmed proposal scores; real model, photograph and human-session evidence remain pending.
 
 Browser checks and their scope are recorded in [verification notes](docs/verification.md). Real provider credentials and actual sandbox approvals are separate integration gates; passing simulated tests does not establish them.
 

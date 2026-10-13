@@ -44,6 +44,7 @@ Rules: https://paypalaihackathon.devpost.com/rules
 - [x] Public source repository and complete local run/configuration instructions.
 - [x] Submission copy, actual app gallery and under-three-minute recording script/shot list.
 - [x] Inventory-change and withdrawal/replacement browser checks; responsive creation, proposal and receipt checks; visible recipient prices and persistent judge persona.
+- [x] Synthetic text evaluation preparation: 30 listing/60 request probes, offline baseline, twelve grader checks and an opt-in connected comparison runner. This does not complete real model/photo or user-research validation.
 - [ ] Actual OpenAI extraction/interpretation, PayPal sandbox checkout, void/refund evidence and verified webhook delivery.
 - [ ] Hosted judge access and deployed restart check, if hosting is chosen.
 - [ ] Actual provider footage for the final demonstration.
