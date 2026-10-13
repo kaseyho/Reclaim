@@ -31,7 +31,7 @@ def system(tmp_path):
         with bootstrap.begin() as db:
             db.execute(CreateSchema(schema))
         url=bootstrap.url.update_query_dict({"options":"-csearch_path="+schema}).render_as_string(hide_password=False)
-    config=Settings(database_url=url,auto_worker=False,openai_api_key="",payment_mode="demo")
+    config=Settings(database_url=url,auto_worker=False,openai_api_key="",soclaas_api_key="",payment_mode="demo")
     store=Store(config.database_url)
     service=Service(store,config)
     workspace,tokens=store.create(seed())

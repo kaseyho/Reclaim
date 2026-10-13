@@ -10,12 +10,12 @@ import math
 import os
 from pathlib import Path
 import re
-from types import SimpleNamespace
 
 from dotenv import load_dotenv
 
 from . import ai as ai_module
 from .ai import AI, AIUnavailable
+from .config import Settings
 
 
 def normalized(value, key=""):
@@ -160,10 +160,10 @@ def load_cases(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--provider", choices=("baseline", "openai"), default="baseline")
+    parser.add_argument("--provider", choices=("baseline", "openai", "soclaas"), default="baseline")
     parser.add_argument("--dataset", type=Path, default=Path("evaluation/cases.jsonl"))
     parser.add_argument("--output", type=Path, default=Path("artifacts/raw/ai-evaluation.json"))
-    parser.add_argument("--model", action="append", help="Repeat to compare explicit pinned models; OpenAI mode only.")
+    parser.add_argument("--model", action="append", help="Repeat to compare explicit model IDs or aliases; connected modes only.")
     parser.add_argument("--limit", type=int, help="Explicit small smoke run; report records the reduced scope.")
     parser.add_argument("--stop-after-errors", type=int, default=3)
     args = parser.parse_args()
@@ -172,15 +172,17 @@ def main():
     if args.provider == "baseline" and args.model:
         parser.error("Baseline mode does not call or compare models.")
     load_dotenv()
-    api_key = os.getenv("OPENAI_API_KEY", "") if args.provider == "openai" else ""
-    if args.provider == "openai" and not api_key:
-        parser.error("Set OPENAI_API_KEY in the ignored .env before selecting OpenAI mode.")
+    key_name = "SOCLAAS_API_KEY" if args.provider == "soclaas" else "OPENAI_API_KEY"
+    api_key = os.getenv(key_name, "") if args.provider != "baseline" else ""
+    if args.provider != "baseline" and not api_key:
+        parser.error(f"Set {key_name} in the ignored .env before selecting {args.provider} mode.")
     try:
         dataset = load_cases(args.dataset)
     except (OSError, ValueError, KeyError, TypeError) as error:
         parser.error(f"Dataset could not be loaded: {error}")
     selected = dataset[:args.limit] if args.limit else dataset
-    models = args.model or ([os.getenv("OPENAI_MODEL", "gpt-4.1-mini-2025-04-14")] if api_key else [None])
+    default_model = os.getenv("SOCLAAS_MODEL", "default") if args.provider == "soclaas" else os.getenv("OPENAI_MODEL", "gpt-4.1-mini-2025-04-14")
+    models = args.model or ([default_model] if api_key else [None])
     report = {
         "provenance": "Codex-authored synthetic text probes; labels frozen separately from runtime prompts; not human-reviewed production data.",
         "scope": "Inventory and buyer-request proposals only; no photographs, solver/payments, usable confirmed facts or user research are evaluated.",
@@ -192,7 +194,7 @@ def main():
         "provider": args.provider, "runs": [],
     }
     for model in models:
-        pipeline = AI(SimpleNamespace(openai_api_key=api_key, openai_model=model))
+        pipeline = AI(Settings(openai_api_key=api_key if args.provider == "openai" else "", soclaas_api_key=api_key if args.provider == "soclaas" else "", openai_model=model if args.provider == "openai" else "gpt-4.1-mini-2025-04-14", soclaas_model=model if args.provider == "soclaas" else "default"))
         rows = []
         consecutive_errors = 0
         for case in selected:
@@ -201,8 +203,12 @@ def main():
                 payload = result.model_dump(mode="json")
                 row = {"id": case["id"], "kind": case["kind"], "category": case["category"], "status": "COMPLETED", "prediction": payload, "trace": trace, "score": score_case(case, payload)}
                 consecutive_errors = 0
-            except AIUnavailable:
-                row = {"id": case["id"], "kind": case["kind"], "category": case["category"], "status": "UNAVAILABLE", "prediction": None, "score": score_case(case, None)}
+            except AIUnavailable as error:
+                cause = error.__cause__ or error
+                failure = {"type": type(cause).__name__}
+                if hasattr(cause, "status_code"):
+                    failure["http_status"] = cause.status_code
+                row = {"id": case["id"], "kind": case["kind"], "category": case["category"], "status": "UNAVAILABLE", "failure": failure, "prediction": None, "score": score_case(case, None)}
                 consecutive_errors += 1
             rows.append(row)
             if consecutive_errors >= args.stop_after_errors:

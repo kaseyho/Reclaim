@@ -84,7 +84,7 @@ class ScoringChecks(unittest.TestCase):
             dataset, output = Path(directory) / "cases.jsonl", Path(directory) / "report.json"
             dataset.write_text(json.dumps(case) + "\n")
             args = ["evaluate", "--provider", "baseline", "--dataset", str(dataset), "--output", str(output)]
-            with patch.dict("os.environ", {"OPENAI_API_KEY": "test-key-must-not-be-used"}), patch("sys.argv", args), patch("reclaim.ai.OpenAI", side_effect=AssertionError("No network client allowed")), contextlib.redirect_stdout(io.StringIO()):
+            with patch.dict("os.environ", {"OPENAI_API_KEY": "test-key-must-not-be-used", "SOCLAAS_API_KEY": "test-soclaas-key-must-not-be-used"}), patch("sys.argv", args), patch("reclaim.ai.OpenAI", side_effect=AssertionError("No network client allowed")), contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(main(), 0)
             report = json.loads(output.read_text())
             self.assertEqual(report["provider"], "baseline")

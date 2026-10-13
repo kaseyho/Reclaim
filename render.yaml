@@ -26,6 +26,12 @@ services:
         sync: false
       - key: OPENAI_MODEL
         value: gpt-4.1-mini-2025-04-14
+      - key: SOCLAAS_API_KEY
+        sync: false
+      - key: SOCLAAS_BASE_URL
+        value: https://soclaas-api.comp.nus.edu.sg/v1
+      - key: SOCLAAS_MODEL
+        value: default
       - key: AUTO_WORKER
         value: "true"
       - key: AUTH_MODE

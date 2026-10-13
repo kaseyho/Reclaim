@@ -33,7 +33,7 @@ npm run dev
 
 Open http://127.0.0.1:5173. API health: http://127.0.0.1:8000/api/health. Interactive API docs: http://127.0.0.1:8000/docs.
 
-Without provider credentials, the app uses a **labelled deterministic text parser and simulated payments**. This is a functional local walkthrough, not proof of live OpenAI or PayPal sandbox transactions. It exercises the same domain commands and persisted payment state machine. No money moves.
+Without provider credentials, the app uses a **labelled deterministic text parser and simulated payments**. This is a functional local walkthrough, not proof of live AI or PayPal sandbox transactions. It exercises the same domain commands and persisted payment state machine. No money moves. AI and payment configuration are independent; a connected AI provider does not turn demo payments into sandbox payments.
 
 To serve the production build through FastAPI instead of Vite, run `npm run build`, set `APP_URL=http://127.0.0.1:8000`, restart the API, and open port 8000.
 
@@ -62,7 +62,7 @@ The recovery lab is available only in demo mode. Its DEMO-prefixed results must 
 
 Follow [the account and configuration guide](docs/provider-setup.md). Required for the connected release:
 
-- OpenAI API key for structured text/image extraction and request interpretation.
+- SOCLAAS key, API root and model for text/image extraction and request interpretation, or an OpenAI API key for the alternative Responses adapter. The supplied SOCLAAS `default` alias is supported through Chat Completions with local schema validation.
 - PayPal sandbox app client ID and secret; one sandbox merchant and separate buyer accounts.
 - A registered PayPal webhook and its ID.
 - PostgreSQL for deployed, multi-process durability; Supabase's PostgreSQL is supported through its connection URL.
@@ -76,7 +76,7 @@ Never commit `.env`, provider secrets, personal buyer credentials, or unredacted
 flowchart LR
   UI[React buyer and seller workspace] --> API[FastAPI commands and permissions]
   API --> DB[(Versioned workspace aggregates and durable job outbox)]
-  API --> AI[OpenAI Responses API: typed suggestions]
+  API --> AI[SOCLAAS Chat Completions or OpenAI Responses: typed suggestions]
   API --> SOLVE[OR-Tools CP-SAT plus independent validator]
   DB --> WORKER[Resumable Python payment worker]
   WORKER --> PP[PayPal sandbox Orders v2 and Payments v2]
@@ -98,9 +98,9 @@ npm run verify
 
 This builds TypeScript/Vite, runs the application Python suite, and checks the evaluation grader and offline benchmark. Application tests include property-based cent-rounding checks and small solver cases compared with exhaustive enumeration. Payment tests cover stale terms, concurrent proposals, incomplete approvals, lost responses, partial capture, failed refunds, expiry and restart.
 
-GitHub Actions runs the full suite against PostgreSQL 16, then builds and starts the Docker image. The verified baseline has 34 passing PostgreSQL tests; local SQLite runs have 33 passing tests and one PostgreSQL-only skip.
+GitHub Actions runs the full suite against PostgreSQL 16, then builds and starts the Docker image. Local SQLite checks pass 46 application tests with one PostgreSQL-only skip, including 13 provider-contract checks for routing, image encoding, validation, failure handling and credential privacy. The PostgreSQL suite includes that additional database test.
 
-The [text evaluation pack](evaluation/README.md) freezes 30 synthetic listings and 60 synthetic requests independently of the runtime prompt. It includes an offline parser report, twelve scoring checks and an explicit opt-in OpenAI comparison command. GitHub Actions checks the grader and runs the offline benchmark without an API key. These are unconfirmed proposal scores; real model, photograph and human-session evidence remain pending.
+The [text evaluation pack](evaluation/README.md) freezes 30 synthetic listings and 60 synthetic requests independently of the runtime prompt. It includes an offline parser report, twelve scoring checks and explicit opt-in SOCLAAS/OpenAI evaluation commands. GitHub Actions checks the grader and runs the offline benchmark without either API key. These are unconfirmed proposal scores; representative photograph and human-session evidence remain pending.
 
 Browser checks and their scope are recorded in [verification notes](docs/verification.md). Real provider credentials and actual sandbox approvals are separate integration gates; passing simulated tests does not establish them.
 

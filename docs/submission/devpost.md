@@ -24,7 +24,7 @@ Furniture, creator equipment and divisible sealed bulk goods use the same alloca
 
 ## How we built it
 
-React, Vite and TypeScript provide the marketplace, seller review, buyer review, checkout, and order workspace. FastAPI and Pydantic validate API commands. OpenAI's Responses API supplies structured inventory extraction and request interpretation through a provider adapter. Seller and buyer confirmation establish usable facts; model suggestions alone do not satisfy hard constraints.
+React, Vite and TypeScript provide the marketplace, seller review, buyer review, checkout, and order workspace. FastAPI and Pydantic validate API commands. SOCLAAS supplies text/image inventory extraction and buyer interpretation through the OpenAI Python SDK's Chat Completions API. Its requested `default` alias returned `qwen3.6:35b` in the verified runs. JSON mode is followed by local schema validation. An optional OpenAI Responses adapter remains available. Seller and buyer confirmation establish usable facts; model suggestions alone do not satisfy hard constraints.
 
 Google OR-Tools CP-SAT solves integer quantity assignments with complete-request, inventory, attribute, budget and fulfillment constraints. A separate invariant validator recomputes the published allocation and price split.
 
@@ -42,11 +42,11 @@ Separate buyer payments are not atomic. A successful authorization can still fai
 
 The local end-to-end walkthrough covers fresh buyer requests, complementary allocations, participant review, coordinated simulated payment outcomes, individual receipts and pickup. Focused tests exercise allocation invariants, concurrency, stale proposals, timeouts, partial capture, refunds and restart behavior.
 
-The application suite passes 34 tests against PostgreSQL 16 in GitHub Actions. Twelve additional checks verify the evaluation grader. The Docker image builds, starts and serves the application. Browser checks include an entirely fresh seller listing and three fresh requests, all three example categories, partial-payment recovery, receipt export and independent pickup completion.
+Local application checks pass 46 tests with one PostgreSQL-only skip, including 13 AI provider-contract checks. Twelve additional checks verify the evaluation grader. PostgreSQL and Docker checks run in GitHub Actions. Browser checks include an entirely fresh seller listing and three fresh requests, all three example categories, partial-payment recovery, receipt export and independent pickup completion. Actual SOCLAAS extraction from a fictional illustration and fresh buyer interpretation also produce a complete $72 / $48 / $80 allocation after review.
 
-We added a frozen text evaluation set containing 30 synthetic listings and 60 synthetic requests, with agent-authored labels kept out of the runtime prompts. The offline parser baseline achieved 74.0% scored-field precision, 60.5% recall and 2/90 exact cases. This measures the limited deterministic fallback, not OpenAI accuracy; live model comparison, photo evaluation and independent human review remain pending.
+The text development set contains 30 synthetic listings and 60 synthetic requests, with agent-authored labels kept out of the runtime prompts. SOCLAAS returned 90/90 validated responses at 96.48% proposal-field precision, 94.88% recall and 70/90 exact cases; median/p95 model-call latency was 1.54/2.99 seconds. The probes informed schema clarification, so these are development results, not untouched held-out accuracy or usable confirmed-fact precision. Independent labels, representative real photographs and human sessions remain pending.
 
-**Current draft status:** the verified walkthrough uses a labelled deterministic parser and simulated payments. Actual OpenAI extraction/interpretation, PayPal sandbox authorization/capture/void/refund and webhook evidence, deployment verification, and the final public YouTube demo are still pending. The screenshots show fictional fixtures and keep the demo labels visible; they do not establish real seller consent or user demand.
+**Current draft status:** actual SOCLAAS text and image input are verified locally; payment walkthroughs still use visibly labelled simulations. Actual PayPal sandbox authorization/capture/void/refund and webhook evidence, deployment verification, and the final public YouTube demo are still pending. The examples are fictional fixtures and do not establish real seller consent or user demand.
 
 ## What we learned
 
@@ -58,7 +58,7 @@ Pilot the workflow with students furnishing rooms, creators assembling equipment
 
 ## Built with
 
-Python, TypeScript, React, Vite, FastAPI, Pydantic, OpenAI Responses API, Google OR-Tools, SQLAlchemy, PostgreSQL, PayPal JavaScript SDK, PayPal Orders v2, PayPal Payments v2, pytest, Hypothesis.
+Python, TypeScript, React, Vite, FastAPI, Pydantic, SOCLAAS, Qwen 3.6, OpenAI Python SDK, Google OR-Tools, SQLAlchemy, PostgreSQL, PayPal JavaScript SDK, PayPal Orders v2, PayPal Payments v2, pytest, Hypothesis.
 
 Add Render to the built-with list only if a Render deployment is actually completed.
 
@@ -68,22 +68,22 @@ Add Render to the built-with list only if a Render deployment is actually comple
 - Functional demo URL: **PENDING deployment**. Complete local run instructions are in README.md.
 - Public YouTube video: **PENDING user's recording and final edit**.
 - Payment environment: sandbox only; no real-money payments.
-- Local demo mode clearly labels its deterministic parser and simulated payments. Those labels must remain visible in any footage using that mode.
+- Provider modes are independent. Actual SOCLAAS AI is configured locally; current payments remain simulated. Keep the applicable mode labels visible in footage.
 - All listing examples and original SVG illustrations are fictional fixtures; they are not evidence of real seller consent or demand.
 
 ## Saved technical custom-field answers
 
 Main technology requirement (under 255 characters):
 
-> PayPal JS SDK + Orders/Payments v2 coordinate per-buyer authorization, capture, void/refund. OpenAI Responses (gpt-4.1-mini-2025-04-14) extracts inventory/needs; OR-Tools validates. Actual provider tests are pending; local demo is simulated.
+> PayPal JS SDK + Orders/Payments v2 manage authorization, capture and void/refund. SOCLAAS Chat Completions (default, returned qwen3.6:35b) extracts text/images and buyer needs; OR-Tools validates allocations. AI calls verified; sandbox payments pending.
 
 AI tools used while building (under 255 characters):
 
-> Codex assisted coding, verification and submission preparation. The app includes an OpenAI Responses adapter using gpt-4.1-mini-2025-04-14 for inventory and buyer needs. Actual model calls remain pending; the local demo uses a deterministic parser.
+> Codex assisted coding, verification and submission preparation. The app now uses SOCLAAS through the OpenAI Python SDK, with default resolving to qwen3.6:35b in verified text/image calls. The optional OpenAI Responses adapter remains available.
 
 Testing instructions (under 255 characters):
 
-> Run README's local setup; use Maya for listings and Alice/Ben/Chen for buyer needs, acceptance, payment and pickup. Demo mode is simulated. Real sandbox requires .env keys and three PayPal test buyers. No shared credentials.
+> Run README's setup; use Maya for listings and Alice/Ben/Chen for requests, acceptance and pickup. Configure SOCLAAS or OpenAI for AI. Current payments are simulated; real sandbox needs .env keys and three PayPal test buyers. No shared credentials.
 
 ## Submission state
 
@@ -96,6 +96,7 @@ On 13 October 2026, the user confirmed registration and the authenticated hackat
 - Saved and verified: title, tagline, original thumbnail, project story, twelve built-with tags, repository link, six captioned screenshots, factual technical answers, and the user's supplied submitter/feedback choices.
 - The preview explicitly says **INCOMPLETE SUBMISSION**. The editor says **DRAFT**, with 2/5 steps complete; incomplete steps can still contain saved fields.
 - Saved and verified after revisiting the editor: the user's rating explanation and the optional complete `reclaim-source.zip` attachment. The source ZIP contains the tracked application, run instructions, submission assets and synthetic text evaluation pack; it excludes local secrets and workspace data.
+- Updated and verified after the SOCLAAS connection: factual provider/tool answers, judge instructions, project story and two actual-model screenshots with captions. The gallery now has eight images. Earlier images retain their historical demo labels.
 - Pending: working demo/test-build URL, public YouTube video, actual provider evidence, eligibility declarations, and final agreement/submission.
 
 Complete the final evidence and video, then inspect the final form and verify Devpost's submission confirmation. A saved draft and visible project preview do not establish hackathon submission.

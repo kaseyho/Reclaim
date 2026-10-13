@@ -18,7 +18,7 @@ function dates(lot?: Lot) {
   return { start: localDate(lot?.pickup_start ?? start.toISOString()), end: localDate(lot?.pickup_end ?? end.toISOString()) }
 }
 function SuggestionNote({ unresolved, config }: { unresolved: string[]; config: Config }) {
-  return <div className="notice suggestion"><strong>{config.ai_provider === 'openai' ? 'AI suggestion — your review matters' : 'Demo parser suggestion — review every field'}</strong><ul>{unresolved.map((item, i) => <li key={i}>{item}</li>)}</ul></div>
+  return <div className="notice suggestion"><strong>{config.ai_provider !== 'demo-parser' ? 'AI suggestion — your review matters' : 'Demo parser suggestion — review every field'}</strong><ul>{unresolved.map((item, i) => <li key={i}>{item}</li>)}</ul></div>
 }
 
 type Common = { token: string; actor: Actor; lot?: Lot; config: Config; done: (id?: string) => Promise<void> }

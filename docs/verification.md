@@ -30,11 +30,20 @@ These checks establish local behavior and the tested CI database/container paths
 - Selected-item details now expose each recipient's full purchase and exact total. Item-marker targets measure 44 × 44 pixels; right-edge labels remain within the image.
 - Fresh examples retain Alice as the selected persona after reload. Creation dialogs focus the editing field; Escape dismisses them. A full keyboard and screen-reader audit is not claimed.
 - Devpost registration was confirmed after the user's handoff. Existing draft `1234351` was filled and saved with the title, pitch, thumbnail, story, twelve technology tags, repository link, six captioned screenshots and technical additional information. User-supplied submitter and feedback choices were saved separately. The live preview says `INCOMPLETE SUBMISSION`; the final agreement remains unchecked and the project has not been submitted.
-- [Text evaluation preparation](../evaluation/README.md): 30 Codex-authored synthetic listings and 60 requests, frozen separately from the unchanged runtime prompt. Twelve grader checks pass. The offline demo parser returns all 90 responses, with 74.03% proposal-field precision, 60.54% recall and 2/90 exact cases. These are regex-parser results, not OpenAI accuracy, usable-fact precision, photo validation or real-user evidence. A connected comparison remains pending.
+- [Text evaluation preparation](../evaluation/README.md): 30 Codex-authored synthetic listings and 60 requests, with labels excluded from inference prompts. Twelve grader checks pass. The historical offline parser returned all 90 responses, with 74.03% proposal-field precision, 60.54% recall and 2/90 exact cases. These are parser results, not usable-fact precision, photo validation or real-user evidence.
+
+### Connected AI checks — 13 October 2026
+
+- SOCLAAS `/models` authenticated; the user's `default` alias resolved to `qwen3.6:35b`. The server uses the exact supplied HTTPS API root, an ignored local key, Chat Completions JSON mode and Pydantic validation. No direct OpenAI-model call is claimed.
+- A fresh seller listing used the original fictional furniture illustration and explicit condition/measurement text. Actual model output identified desk, monitor, lamp and chair, omitted the excluded decorative plant, retained the 92 cm text measurement and 24-inch monitor fact, and left other dimensions/brands unresolved. Seller review set the reference weights, $180 goods price and $20 preparation cost.
+- Fresh Alice, Ben and Chen requests were interpreted, reviewed and saved. A monitor-diagonal clarification removed an invented width limit; a pickup-place schema clarification improved place extraction. Chen's pickup point was manually corrected during review. The resulting complete allocation is $72 / $48 / $80, independently validated by the solver.
+- Browser traces contain actual SOCLAAS response IDs, returned model, prompt versions, latency and token usage. Payment mode remains demo. These are fictional testing personas, not buyer/seller research sessions.
+- [Final development report](../evaluation/soclaas.md): all 90 responses returned; 96.48% proposal-field precision, 94.88% recall and 70/90 exact cases. p50/p95 model-call latency is 1536/2986 ms, with 86557 input and 15729 output tokens. Cost remains unmeasured. Six of 16 ambiguity-warning checks were missed. The probes informed schema clarification, so fresh independent held-out data is still required.
+- Local production build, 46 application checks with one PostgreSQL-only skip, 13 included AI contract checks and 12 grader checks pass. Mocked checks cover protocol/routing, image payloads, invalid output, refusal, truncation, empty choices, timeout and secret-free public configuration. Actual provider refusal/timeout fault injection is not claimed.
 
 ## Remaining verification gates
 
-- [ ] Actual OpenAI image/text extraction and interpretation; refusal/incomplete response and provider-timeout checks.
+- [x] Actual SOCLAAS text extraction, buyer interpretation and image input through the configured endpoint; mocked refusal/incomplete/schema/timeout checks. Representative real-photo accuracy remains unmeasured. The optional OpenAI adapter has mocked protocol coverage, not actual OpenAI-call evidence.
 - [ ] Actual PayPal sandbox approvals, authorizations and captures for three buyers.
 - [ ] Actual sandbox void and refund IDs verified in the merchant dashboard.
 - [ ] Verified webhook delivery and duplicate handling.
@@ -54,16 +63,16 @@ These checks establish local behavior and the tested CI database/container paths
 
 | Requirement | Current authoritative evidence | Release status |
 |---|---|---|
-| Fresh seller listing, inventory correction and confirmation | Browser walkthrough and `Forms.tsx`; image/text adapter in `ai.py` | Local flow verified; actual image/model call awaits credentials |
-| Fresh needs, quantities, attributes, budgets and pickup constraints | Browser walkthrough; strict schemas, solver and invariant tests | Local flow verified; actual interpretation awaits credentials |
+| Fresh seller listing, inventory correction and confirmation | Browser walkthrough and `Forms.tsx`; actual SOCLAAS image/text extraction in `ai.py` | Connected flow verified with an original fictional illustration; real-photo accuracy unmeasured |
+| Fresh needs, quantities, attributes, budgets and pickup constraints | Browser walkthrough; actual SOCLAAS interpretation; strict schemas, solver and invariant tests | Connected interpretation verified; suggestions still require correction and confirmation |
 | Complete allocation, missing demand and transparent prices | Three category walkthroughs; exhaustive/property checks | Verified at the tested prototype scale |
 | Immutable versions, reservations, all-party acceptance and recovery | Domain tests plus inventory/withdrawal browser checks above | Verified locally and in the tested PostgreSQL CI paths |
 | Sandbox authorization, capture, void, refund and signed webhook delivery | Adapter and mocked contracts; simulated journal/outbox results | Actual provider evidence missing; completion is unproven |
 | Individual receipt, preparation, collection and problem reporting | All three pickups, JSON receipt and open-issue browser checks | Local flow verified |
 | Proposed private object storage and signed-in deployment | Workspace-private image data; optional Supabase JWT adapter; Docker/Render configuration | Dedicated object storage and deployed account paths are not integrated/verified |
-| Model evaluation, about 30 listings/60 requests and human sessions | Synthetic 30/60 text probes, frozen labels, offline parser report and connected-model runner | Preparation available; independent labels, actual model/photo comparison and human sessions remain unverified |
+| Model evaluation, about 30 listings/60 requests and human sessions | Synthetic 30/60 text probes, frozen labels, offline parser report and actual SOCLAAS evaluation | Actual text scores available; independent labels, model comparison, real-photo accuracy and human sessions remain unverified |
 | Public licensed source and reproducible run instructions | Public repository, MIT licence, CI Docker startup and README | Available; connected run still requires provider configuration |
 | Demo script, user's recording, final edit and public YouTube video | 352-word script, storyboard, original cards and app gallery | Preparation complete; recording, final video and public URL missing |
-| Devpost draft and final submission confirmation | Saved draft `1234351`; live preview at https://devpost.com/software/reclaim-us0lrm shows the story and six screenshots | Draft saved; rating explanation, demo/video, user declarations and final submission remain pending |
+| Devpost draft and final submission confirmation | Saved draft `1234351`; live preview at https://devpost.com/software/reclaim-us0lrm shows the story and six screenshots; rating explanation and source attachment verified | Draft saved; demo/video, user declarations and final submission remain pending |
 
 The full goal is not achieved. Completing the connected release requires provider/account input, the user's recording, actual provider proof, and final publication/submission. Prepared documentation and simulated results are not substitutes for those gates.

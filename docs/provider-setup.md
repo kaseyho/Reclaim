@@ -2,7 +2,25 @@
 
 This is the setup needed to replace the labelled local parser/payments with actual provider calls. Keep secrets in the ignored `.env` file locally or the host's secret environment settings. Never paste them into Devpost, GitHub or chat.
 
-## 1. OpenAI
+## 1. AI provider
+
+### SOCLAAS (current connection)
+
+Set these in the ignored local `.env`, using a plain URL rather than a Markdown link:
+
+```dotenv
+SOCLAAS_BASE_URL=https://soclaas-api.comp.nus.edu.sg/v1
+SOCLAAS_API_KEY=YOUR_KEY
+SOCLAAS_MODEL=default
+```
+
+SOCLAAS takes precedence when its key is present. The server uses the OpenAI Python SDK with this API root and the Chat Completions endpoint. SOCLAAS JSON mode is followed by Pydantic validation; this is not a strict-decoder schema guarantee. Refused, incomplete, invalid or timed-out results remain unavailable rather than becoming simulated successes.
+
+On 13 October 2026, the supplied key authenticated at `/models`; `default` resolved to `qwen3.6:35b`. Actual text extraction, buyer interpretation and image input were exercised. Keep `default` as requested; aliases may change, so traces record both the requested alias and the returned model. The browser's connection strip should say **SOCLAAS · default**. The local image check uses an original fictional illustration, not a real seller photograph or an image-accuracy benchmark.
+
+As Maya, create a fresh listing, upload an image, and inspect/correct the proposed inventory. As a buyer, submit and review a fresh request. **Activity & evidence → AI traces** shows the returned model, response ID, latency and token usage. The key remains server-side and is omitted from public configuration and source archives.
+
+### OpenAI alternative
 
 1. Sign in at https://platform.openai.com/ and create an API project/key at https://platform.openai.com/api-keys.
 2. Ensure the project can make API calls; API usage billing is separate from a ChatGPT subscription. Choose a budget in the provider dashboard.
@@ -10,7 +28,7 @@ This is the setup needed to replace the labelled local parser/payments with actu
 4. Restart the API and reload the browser. **Connection status** should say OpenAI configured. A successful fresh extraction establishes the actual provider call.
 5. As Maya, extract a fresh listing containing text and a photo. As Chen, interpret a fresh request. Inspect **Activity & evidence → AI traces** for the actual model, response ID, latency and token usage.
 
-Use the [text evaluation runner](../evaluation/README.md) for a three-case smoke run, then a full frozen-set model comparison. The included 30 listings/60 requests are synthetic, with agent-authored labels; independent human review and photo cases are still needed. Keep provider reports in the ignored `artifacts/raw` folder until their contents and claims have been reviewed.
+Use the [text evaluation runner](../evaluation/README.md) with the explicitly selected provider for a three-case smoke run, then a full frozen-set evaluation. The included 30 listings/60 requests are synthetic, with agent-authored labels; independent human review and photo cases are still needed. Keep provider reports in the ignored `artifacts/raw` folder until their contents and claims have been reviewed.
 
 The chosen snapshot supports image inputs, Responses API and structured outputs. [Model documentation](https://developers.openai.com/api/docs/models/gpt-4.1-mini), [structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs).
 
@@ -70,7 +88,7 @@ An optional separate worker uses `PYTHONPATH=backend python -m reclaim.worker`, 
 
 ## Information still needed to finish the connected release
 
-- A local `.env` populated with OpenAI and PayPal sandbox settings, or the exact hosting project/configuration location.
+- PayPal sandbox settings in the ignored local `.env`, or the exact hosting project/configuration location. SOCLAAS AI is now configured locally.
 - A database/hosting account and chosen plan if a hosted demo is desired.
 - Actual sandbox buyer approvals and captured/refunded/voided provider evidence.
 - The user's talking-head recording for the final edit.
