@@ -42,7 +42,9 @@ Separate buyer payments are not atomic. A successful authorization can still fai
 
 The local end-to-end walkthrough covers fresh buyer requests, complementary allocations, participant review, coordinated simulated payment outcomes, individual receipts and pickup. Focused tests exercise allocation invariants, concurrency, stale proposals, timeouts, partial capture, refunds and restart behavior.
 
-The full suite passes 34 tests against PostgreSQL 16 in GitHub Actions. The Docker image builds, starts and serves the application. Browser checks include an entirely fresh seller listing and three fresh requests, all three example categories, partial-payment recovery, receipt export and independent pickup completion.
+The application suite passes 34 tests against PostgreSQL 16 in GitHub Actions. Twelve additional checks verify the evaluation grader. The Docker image builds, starts and serves the application. Browser checks include an entirely fresh seller listing and three fresh requests, all three example categories, partial-payment recovery, receipt export and independent pickup completion.
+
+We added a frozen text evaluation set containing 30 synthetic listings and 60 synthetic requests, with agent-authored labels kept out of the runtime prompts. The offline parser baseline achieved 74.0% scored-field precision, 60.5% recall and 2/90 exact cases. This measures the limited deterministic fallback, not OpenAI accuracy; live model comparison, photo evaluation and independent human review remain pending.
 
 **Current draft status:** the verified walkthrough uses a labelled deterministic parser and simulated payments. Actual OpenAI extraction/interpretation, PayPal sandbox authorization/capture/void/refund and webhook evidence, deployment verification, and the final public YouTube demo are still pending. The screenshots show fictional fixtures and keep the demo labels visible; they do not establish real seller consent or user demand.
 
@@ -93,7 +95,7 @@ On 13 October 2026, the user confirmed registration and the authenticated hackat
 - Submission ID: `1234351`; project ID: `1479953`.
 - Saved and verified: title, tagline, original thumbnail, project story, twelve built-with tags, repository link, six captioned screenshots, factual technical answers, and the user's supplied submitter/feedback choices.
 - The preview explicitly says **INCOMPLETE SUBMISSION**. The editor says **DRAFT**, with 2/5 steps complete; incomplete steps can still contain saved fields.
-- The optional 22-file preparation ZIP was selected for upload. Chrome extension UI interrupted the save check; attachment persistence is unverified. Inspect the live draft before retrying.
-- Pending: the user's rating explanation, working demo/test-build URL, public YouTube video, actual provider evidence, eligibility declarations, and final agreement/submission.
+- Saved and verified after revisiting the editor: the user's rating explanation and the optional complete `reclaim-source.zip` attachment. The source ZIP contains the tracked application, run instructions, submission assets and synthetic text evaluation pack; it excludes local secrets and workspace data.
+- Pending: working demo/test-build URL, public YouTube video, actual provider evidence, eligibility declarations, and final agreement/submission.
 
 Complete the final evidence and video, then inspect the final form and verify Devpost's submission confirmation. A saved draft and visible project preview do not establish hackathon submission.
