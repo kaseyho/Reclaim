@@ -136,8 +136,8 @@ class Extraction(StrictModel):
 class Interpretation(StrictModel):
     needs: list[Need]
     budget_minor: int | None
-    location: str | None
-    pickup_description: str | None
+    location: str | None = Field(description="The explicitly named pickup or collection place in the buyer's request, not their home location. Null only when no place is stated.")
+    pickup_description: str | None = Field(description="The requested pickup timing or date wording only. Put the pickup place in location, not here. Null when no timing is stated.")
     allow_substitutions: bool
     unresolved: list[str]
 

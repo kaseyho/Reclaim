@@ -1,5 +1,6 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import os
+from urllib.parse import urlsplit
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -12,10 +13,13 @@ class Settings:
     cors_origins: str = os.getenv("CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173")
     payment_mode: str = os.getenv("PAYMENT_MODE", "demo")
     paypal_client_id: str = os.getenv("PAYPAL_CLIENT_ID", "")
-    paypal_client_secret: str = os.getenv("PAYPAL_CLIENT_SECRET", "")
+    paypal_client_secret: str = field(default=os.getenv("PAYPAL_CLIENT_SECRET", ""),repr=False)
     paypal_webhook_id: str = os.getenv("PAYPAL_WEBHOOK_ID", "")
-    openai_api_key: str = os.getenv("OPENAI_API_KEY", "")
+    openai_api_key: str = field(default=os.getenv("OPENAI_API_KEY", ""),repr=False)
     openai_model: str = os.getenv("OPENAI_MODEL", "gpt-4.1-mini-2025-04-14")
+    soclaas_api_key: str = field(default=os.getenv("SOCLAAS_API_KEY", ""),repr=False)
+    soclaas_base_url: str = os.getenv("SOCLAAS_BASE_URL", "https://soclaas-api.comp.nus.edu.sg/v1").strip().rstrip("/")
+    soclaas_model: str = os.getenv("SOCLAAS_MODEL", "default")
     auth_mode: str = os.getenv("AUTH_MODE", "workspace")
     supabase_url: str = os.getenv("SUPABASE_URL", "").rstrip("/")
     supabase_publishable_key: str = os.getenv("SUPABASE_PUBLISHABLE_KEY", "")
@@ -25,6 +29,10 @@ class Settings:
     auto_worker: bool = os.getenv("AUTO_WORKER", "true").lower() == "true"
 
     def __post_init__(self):
+        if self.soclaas_api_key:
+            endpoint=urlsplit(self.soclaas_base_url)
+            if endpoint.scheme!="https" or not endpoint.hostname or endpoint.username or endpoint.password or endpoint.query or endpoint.fragment:
+                raise ValueError("SOCLAAS_BASE_URL must be a plain HTTPS API root without credentials, query or fragment.")
         if self.payment_mode not in {"demo", "sandbox"}:
             raise ValueError("Only demo and PayPal sandbox payments are supported.")
         if self.auth_mode not in {"workspace", "supabase"}:
@@ -44,3 +52,19 @@ class Settings:
     @property
     def paypal_ready(self):
         return bool(self.paypal_client_id and self.paypal_client_secret)
+
+    @property
+    def ai_provider(self):
+        return "soclaas" if self.soclaas_api_key else "openai" if self.openai_api_key else "demo-parser"
+
+    @property
+    def ai_api_key(self):
+        return self.soclaas_api_key or self.openai_api_key
+
+    @property
+    def ai_model(self):
+        return self.soclaas_model if self.soclaas_api_key else self.openai_model if self.openai_api_key else None
+
+    @property
+    def ai_base_url(self):
+        return self.soclaas_base_url if self.soclaas_api_key else None

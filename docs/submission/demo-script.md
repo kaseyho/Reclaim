@@ -2,7 +2,7 @@
 
 Target: approximately 2 minutes 40 seconds, leaving room for opening/closing cards under the three-minute limit. Read naturally, around 135–145 words per minute. Record the voice in one take; the product footage will cover most of the middle, with your talking head returning at the end.
 
-This script describes the intended connected release. Before publishing it, verify a fresh OpenAI extraction and actual PayPal sandbox authorizations, captures, and cancellation recovery. The current local walkthrough labels its parser and payments as simulated. Do not cover those labels and present the simulation as a live integration.
+This script describes the intended connected release. SOCLAAS text and image input now work through the OpenAI SDK; the image check uses a fictional illustration. Before publishing, verify actual PayPal sandbox authorizations, captures, and cancellation recovery. AI and payment modes are independent: the current local build connects to SOCLAAS while its payments remain visibly simulated. Do not cover the payment labels and present a simulation as a live PayPal integration.
 
 ## Read this
 

@@ -15,7 +15,7 @@ Do not film credentials, private account details, browser notifications, or unre
 
 ## Footage checklist
 
-- [ ] Fresh listing with an uploaded photo and OpenAI extraction.
+- [x] Fresh listing with actual SOCLAAS extraction from uploaded text and an original fictional illustration. Representative real-photo accuracy remains unmeasured.
 - [ ] Seller confirmation and unresolved attributes.
 - [ ] Fresh buyer requirement review.
 - [ ] Missing-monitor state and completed group.

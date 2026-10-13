@@ -97,11 +97,11 @@ def create_app(settings=None,store=None):
 
     @app.get("/api/health")
     def health():
-        return {"status":"ok","payment_mode":settings.payment_mode,"ai_provider":"openai" if settings.openai_api_key else "demo-parser","paypal_configured":settings.paypal_ready,"database":"sqlite-local" if store.sqlite else "postgresql"}
+        return {"status":"ok","payment_mode":settings.payment_mode,"ai_provider":settings.ai_provider,"paypal_configured":settings.paypal_ready,"database":"sqlite-local" if store.sqlite else "postgresql"}
 
     @app.get("/api/config")
     def config():
-        return {"payment_mode":settings.payment_mode,"paypal_client_id":settings.paypal_client_id if settings.payment_mode=="sandbox" else None,"paypal_configured":settings.paypal_ready,"ai_provider":"openai" if settings.openai_api_key else "demo-parser","ai_model":settings.openai_model if settings.openai_api_key else None,"auth_mode":settings.auth_mode,"supabase_url":settings.supabase_url or None,"supabase_publishable_key":settings.supabase_publishable_key if settings.auth_mode=="supabase" else None,"checkout_minutes":settings.checkout_minutes,"currency":"USD","merchant_scope":"One cooperating sandbox merchant"}
+        return {"payment_mode":settings.payment_mode,"paypal_client_id":settings.paypal_client_id if settings.payment_mode=="sandbox" else None,"paypal_configured":settings.paypal_ready,"ai_provider":settings.ai_provider,"ai_model":settings.ai_model,"auth_mode":settings.auth_mode,"supabase_url":settings.supabase_url or None,"supabase_publishable_key":settings.supabase_publishable_key if settings.auth_mode=="supabase" else None,"checkout_minutes":settings.checkout_minutes,"currency":"USD","merchant_scope":"One cooperating sandbox merchant"}
 
     @app.post("/api/sessions",status_code=201)
     def session(data:SessionInput,request:Request,authorization:str|None=Header(default=None)):

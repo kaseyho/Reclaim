@@ -2,7 +2,9 @@
 
 This is a preparation benchmark for the supplied plan's model-evaluation phase. It contains **30 synthetic listing descriptions and 60 synthetic buyer requests**, split evenly across furniture, creator equipment and sealed bulk goods. Descriptions, fictional brands and reference labels were authored by Codex for Reclaim; no real sellers, buyers or external listing dataset supplied this evidence.
 
-The labels were written from each description and frozen in `cases.jsonl` separately from the unchanged runtime prompt. They are never included in an AI request. No independent human labeller has reviewed them. This is **not** the plan's completed human-reviewed held-out evaluation, photo validation or usability/economics research.
+The labels were written from each description and frozen in `cases.jsonl` separately from the runtime prompt. They are never included in an AI request. No independent human labeller has reviewed them. This is **not** the plan's completed human-reviewed held-out evaluation, photo validation or usability/economics research.
+
+Connected runs exposed a pickup-place mapping issue. Clarifying that field was informed by these probes, so this set now serves as **development/regression data**, not an untouched held-out set. A fresh, independently reviewed evaluation is still required for general accuracy claims.
 
 The cases cover quantities, condition, centimetre normalization, dollar budgets, sealed goods, model/connector/compatibility attributes, explicit unknowns, negated goods, acceptable substitutions and quoted malicious instructions. The [official OpenAI evaluation guide](https://developers.openai.com/api/docs/guides/evaluation-best-practices) recommends task-specific metrics and human calibration; expert review and representative real cases are still required here.
 
@@ -16,11 +18,21 @@ PYTHONPATH=backend .venv/bin/python -m reclaim.evaluation \
   --provider baseline --output artifacts/raw/ai-evaluation-baseline.json
 ```
 
-Baseline mode forces an empty API key, even if `.env` has one. It uses the labelled deterministic demo parser and makes **no OpenAI calls**. The checked-in [baseline report](baseline.json) records the actual predictions, per-case differences, trace metadata and file hashes. Its generated summary is in [baseline.md](baseline.md).
+Baseline mode forces both API keys empty, even if `.env` configures a provider. It uses the labelled deterministic demo parser and makes **no provider calls**. The checked-in [baseline report](baseline.json) records the actual predictions, per-case differences, trace metadata and file hashes for the historical prompt-v1 pipeline at commit `b3ed1ed`. Its generated summary is in [baseline.md](baseline.md); it is not a hash match for the newer provider adapter.
 
 ## Run a connected model
 
-Set `OPENAI_API_KEY` in the ignored `.env` as described in `docs/provider-setup.md`. Start with three cases, inspect the successful Responses IDs and returned model, then run the full set:
+Set the selected provider's key in the ignored `.env` as described in `docs/provider-setup.md`. Start with three cases, inspect the response IDs and returned model, then run the full set. For SOCLAAS:
+
+```sh
+PYTHONPATH=backend .venv/bin/python -m reclaim.evaluation \
+  --provider soclaas --limit 3 --output artifacts/raw/soclaas-evaluation-smoke.json
+
+PYTHONPATH=backend .venv/bin/python -m reclaim.evaluation \
+  --provider soclaas --output artifacts/raw/soclaas-evaluation.json
+```
+
+This keeps the user's `SOCLAAS_MODEL=default` alias; traces record its returned model. The provider mode selects only that provider's key, so an unused provider's configured key cannot redirect a benchmark. For the optional OpenAI adapter:
 
 ```sh
 PYTHONPATH=backend .venv/bin/python -m reclaim.evaluation \
@@ -32,7 +44,7 @@ PYTHONPATH=backend .venv/bin/python -m reclaim.evaluation \
   --output artifacts/raw/ai-evaluation-openai.json
 ```
 
-For a comparison, repeat `--model` with another explicit pinned model available in the API project. A full run makes up to 90 requests **per model** and uses the provider's metered API. The runner does not choose another model or call the API automatically. It stops after three consecutive unavailable responses, retains failed-case outcomes, reports incomplete scope, and exits unsuccessfully if any attempted response failed. It writes results to ignored files by default.
+For a comparison, repeat `--model` with another explicitly chosen model available in the provider project. A full run makes up to 90 requests **per model** and uses the provider's metered API. The runner does not choose another model or call the API automatically. It stops after three consecutive unavailable responses, retains failed-case outcomes, reports incomplete scope, and exits unsuccessfully if any attempted response failed. It writes results to ignored files by default.
 
 Use the report's scores and scope for the quality decision; exit status zero records completed requested calls and report creation. It does not apply an accuracy threshold.
 
@@ -46,7 +58,7 @@ Review the application's seller/buyer experience and photograph extraction separ
 - **Unknown abstentions:** labelled unknown fields left unknown or absent. Read this together with recall: omitting an entire item also omits its known facts.
 - **Warnings:** explicit regular-expression checks on the unresolved list. These are limited heuristics and need human review.
 - **Latency:** the application trace's rounded milliseconds, with nearest-rank p50 and p95. A reported zero for the regex parser is below its reporting resolution; it is not an OpenAI or complete-match latency result.
-- **Tokens and cost:** measured trace totals only. Missing usage makes the total unknown. OpenAI cost stays `null` until billing evidence is reconciled; the offline parser uses zero provider tokens and zero provider API cost.
+- **Tokens and cost:** measured trace totals only. Missing usage makes the total unknown. Connected-provider cost stays `null` until billing evidence is reconciled; the offline parser uses zero provider tokens and zero provider API cost.
 
 Names, evidence prose and free-form pickup wording are not exact-scored. Case, whitespace and numeric unit spellings are normalized; model identifiers retain meaningful leading zeros. Each fixture has one reference record per item type. Multiple incompatible records of one type are treated as duplicate errors; this set does not assess general inventory entity alignment.
 
